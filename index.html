@@ -40,7 +40,6 @@
             transition: all 0.2s;
         }
 
-
         #exif-info {
             position: absolute;
             bottom: 0;
@@ -85,7 +84,7 @@
         <div id="photo-list"></div>
         <div id="photo-viewer"></div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <!-- <script src="node_modules/eruda/eruda.js"></script> -->
     <!-- <script>eruda.init();</script> -->
 
@@ -95,7 +94,6 @@
         const elPhotoList = document.getElementById('photo-list');
         const elPhotoViewer = document.getElementById('photo-viewer');
 
-
         // 我想要一个图片查看器
         // 可以查看图片列表, 点击图片可以出现一个弹窗，可以查看大图以及图片的exif信息，
 
@@ -103,33 +101,24 @@
             return {
                 name: item.name,
                 url: `./photos/${item.name}`,
-                thunb_url: `./thumbs/${item.name}`
-            }
-        }).map(item => {
-            return {
-                ...item,
+                thunb_url: `./thumbs/${item.name}`,
                 img: new Image(),
                 exif: null
             }
-        });
+        })
 
+        elPhotoList.innerHTML = photos.map(item => `<img src="${item.thunb_url}" alt="${item.name}">`).join('');
+        elPhotoList.addEventListener('click', (e) => {
+            const target = e.target;
+            if (target.tagName === 'IMG') {
+                const photo = photos.find(item => item.name === target.alt);
+                const photoViewer = new PhotoViewer();
+                photoViewer.show(photo);
+            }
+        });
 
         // DateTimeOriginal,FocalLengthIn35mmFilm,FNumber,ISOSpeedRatings,ExposureTime
         // Date, Focal, FNumber, ISO, ExposureTime,只要这几个信息就可以了,ExposureTime是快门速度，单位是秒，比如1/1000秒
-
-        photos.forEach(item => {
-            item.img.src = item.thunb_url;
-            elPhotoList.appendChild(item.img);
-            item.img.addEventListener('click', () => {
-                const photoViewer = new PhotoViewer();
-                photoViewer.show(item);
-            });
-
-        });
-
-
-
-        console.log(photos);
 
 
         // 我希望这个图片查看器是一个类，图片被点击后会调用这个类的show方法，传入图片的src，然后这个类会显示一个弹窗，弹窗里面是一个img标签，src是传入的src
@@ -165,7 +154,6 @@
                 }
 
                 img.addEventListener('load', (e) => {
-                    console.log(img);
                     EXIF.getData(img, function () {
                         const exif = EXIF.getAllTags(this);
                         photo.exif = {
@@ -175,7 +163,6 @@
                             ISO: exif.ISOSpeedRatings,
                             ExposureTime: `${exif.ExposureTime.numerator}/${exif.ExposureTime.denominator} s`
                         }
-                        console.log(photo);
                         root.querySelector('#exif-info').innerHTML = `
                             <p>Date: ${photo.exif.Date}</p>
                             <p>Focal: ${photo.exif.Focal}</p>
@@ -183,7 +170,6 @@
                             <p>ISO: ${photo.exif.ISO}</p>
                             <p>ExposureTime: ${photo.exif.ExposureTime}</p>
                         `;
-
                     });
                 });
 
@@ -191,10 +177,7 @@
                     // 我希望滚轮可以放大图片，并且放大的中心是鼠标所在的位置
                     e.preventDefault();
                     const img = this.el.querySelector('img');
-
-                    const scale = (e.deltaY > 0 ? 0.8 : 1.2) * (states.scale);
-                    states.scale = scale;
-
+                    states.scale = (e.deltaY > 0 ? 0.8 : 1.2) * (states.scale);
                     const rect = img.getBoundingClientRect();
                     const percentX = (e.clientX - rect.left) / rect.width;
                     const percentY = (e.clientY - rect.top) / rect.height;
