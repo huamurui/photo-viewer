@@ -18,7 +18,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* justify-content: center; */
         }
 
         #photo-list {
@@ -31,7 +30,7 @@
             width: 300px;
             object-fit: contain;
             margin: 10px;
-            cursor: mouse;
+            cursor: pointer;
         }
 
         #photo-viewer img {
@@ -147,6 +146,7 @@
                     </div>
                 `;
 
+                elPhotoViewer.appendChild(this.el);
                 this.el.querySelector('#close').addEventListener('click', () => {
                     this.hide();
                 });
@@ -177,13 +177,12 @@
                         }
                         console.log(photo);
                         root.querySelector('#exif-info').innerHTML = `
-                    <p>Date: ${photo.exif.Date}</p>
-                    <p>Focal: ${photo.exif.Focal}</p>
-                    <p>FNumber: ${photo.exif.FNumber}</p>
-                    <p>ISO: ${photo.exif.ISO}</p>
-                    <p>ExposureTime: ${photo.exif.ExposureTime}</p>
-                `;
-                        elPhotoViewer.appendChild(root);
+                            <p>Date: ${photo.exif.Date}</p>
+                            <p>Focal: ${photo.exif.Focal}</p>
+                            <p>FNumber: ${photo.exif.FNumber}</p>
+                            <p>ISO: ${photo.exif.ISO}</p>
+                            <p>ExposureTime: ${photo.exif.ExposureTime}</p>
+                        `;
 
                     });
                 });
@@ -200,10 +199,6 @@
                     const percentX = (e.clientX - rect.left) / rect.width;
                     const percentY = (e.clientY - rect.top) / rect.height;
 
-
-                    // states.translateX = states.translateX - (x * (scale - states.scale));
-                    // states.translateY = states.translateY - (y * (scale - states.scale));
-
                     img.style.transform = `scale(${states.scale}) translate(${states.translateX}px, ${states.translateY}px)`;
                     img.style.transformOrigin = `${percentX * 100}% ${percentY * 100}%`;
                 });
@@ -217,8 +212,6 @@
                     const startY = e.clientY;
                     const startTranslateX = states.translateX;
                     const startTranslateY = states.translateY;
-
-
 
                     const move = (e) => {
                         const x = e.clientX - startX;
@@ -291,10 +284,8 @@
             hide() {
                 this.el.remove();
             }
-
         }
 
     </script>
 </body>
-
 </html>
