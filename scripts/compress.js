@@ -15,7 +15,7 @@ if (!fs.existsSync(thumbsDir)) {
 
 files.forEach(file => {
     sharp(path.join(dir, file))
-        .resize(200)
+        .resize(500)
         .toFile(path.join(thumbsDir, file), (err, info) => {
             if (err) {
                 console.error(err);
