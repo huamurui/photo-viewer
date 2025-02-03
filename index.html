@@ -157,11 +157,11 @@
                     EXIF.getData(img, function () {
                         const exif = EXIF.getAllTags(this);
                         photo.exif = {
-                            Date: exif.DateTimeOriginal.split(' ')[0],
-                            Focal: `${exif.FocalLengthIn35mmFilm} mm`,
-                            FNumber: exif.FNumber,
-                            ISO: exif.ISOSpeedRatings,
-                            ExposureTime: `${exif.ExposureTime.numerator}/${exif.ExposureTime.denominator} s`
+                            Date: exif.DateTimeOriginal.split(' ')[0].replace(/:/g, '-'),
+                            Focal: `${exif.FocalLength || '-' } mm ( 35mm film equivalent: ${exif.FocalLengthIn35mmFilm || '-' } mm )`,
+                            FNumber: exif.FNumber || '-' ,
+                            ISO: exif.ISOSpeedRatings || '-' ,
+                            ExposureTime: `${exif.ExposureTime.numerator || '-' }/${exif.ExposureTime.denominator || '-' } s`
                         }
                         root.querySelector('#exif-info').innerHTML = `
                             <p>Date: ${photo.exif.Date}</p>
