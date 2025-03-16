@@ -24,12 +24,29 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
         }
 
         #photo-list img {
             width: 300px;
             object-fit: contain;
             margin: 10px;
+            cursor: pointer;
+        }
+
+        .photo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 350px;
+            position: relative;
+            border-radius: 10px;
+            /* margin: 10px; */
+        }
+
+        .photo:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
             cursor: pointer;
         }
 
@@ -40,15 +57,9 @@
             transition: all 0.2s;
         }
 
-        #exif-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: rgb(255, 189, 189);
-            padding: 10px;
-            box-sizing: border-box;
+        .exif div {
+            /* width: 100%; */
+            text-align: center;
         }
 
         #close {
@@ -84,193 +95,39 @@
         <div id="photo-list"></div>
         <div id="photo-viewer"></div>
     </div>
-    <script defer src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <!-- <script src="node_modules/eruda/eruda.js"></script> -->
     <!-- <script>eruda.init();</script> -->
 
+
     <script type="module">
-        import photoNames from './names.json' with { type: "json" }
+        import photos from './photos/map.json' with { type: "json" }
+        import PhotoViewer from './viewer.js'
 
         const elPhotoList = document.getElementById('photo-list');
         const elPhotoViewer = document.getElementById('photo-viewer');
 
-        // 我想要一个图片查看器
-        // 可以查看图片列表, 点击图片可以出现一个弹窗，可以查看大图以及图片的exif信息，
+        // const  sample =  {"Date":"2025-03-08","Focal":"150 mm ( 35mm film equivalent: - mm )","FNumber":5.6,"ISO":640,"ExposureTime":"1/320"}
+        elPhotoList.innerHTML = photos.map(item => `
+        <div class="photo">
+            <img src="${item.thumb_url}" alt="${item.name}">
+            <div class="exif">
+                <div>${item.exif.Date}</div>
+                <span>${item.exif.Focal} </span>
+                <span>f/${item.exif.FNumber} </span>
+                <span>ISO${item.exif.ISO} </span>
+                <span>${item.exif.ExposureTime}</span>    
+            </div>
 
-        const photos = photoNames.map(item => {
-            return {
-                name: item.name,
-                url: `./photos/${item.name}`,
-                thunb_url: `./thumbs/${item.name}`,
-                img: new Image(),
-                exif: null
-            }
-        })
-
-        elPhotoList.innerHTML = photos.map(item => `<img src="${item.thunb_url}" alt="${item.name}">`).join('');
+        </div>`).join('');
         elPhotoList.addEventListener('click', (e) => {
             const target = e.target;
             if (target.tagName === 'IMG') {
                 const photo = photos.find(item => item.name === target.alt);
-                const photoViewer = new PhotoViewer();
-                photoViewer.show(photo);
+                const photoViewer = new PhotoViewer(elPhotoViewer, photo, target);
             }
         });
 
-        // DateTimeOriginal,FocalLengthIn35mmFilm,FNumber,ISOSpeedRatings,ExposureTime
-        // Date, Focal, FNumber, ISO, ExposureTime,只要这几个信息就可以了,ExposureTime是快门速度，单位是秒，比如1/1000秒
-
-
-        // 我希望这个图片查看器是一个类，图片被点击后会调用这个类的show方法，传入图片的src，然后这个类会显示一个弹窗，弹窗里面是一个img标签，src是传入的src
-        // 点击弹窗空白或叉叉可以关闭弹窗，滚轮,双指拉开可以放大图片，长按可以拖动图片
-        // 并在图片下面显示图片的exif信息
-        class PhotoViewer {
-            constructor() {
-                this.el = document.createElement('div');
-                this.el.innerHTML = `
-                    <div class="mask" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center;">
-                        <div id="close" >x</div>
-                        <img src="">
-                        <div id="exif-info"></div>
-                    </div>
-                `;
-
-                elPhotoViewer.appendChild(this.el);
-                this.el.querySelector('#close').addEventListener('click', () => {
-                    this.hide();
-                });
-            }
-
-            show(photo) {
-                const img = this.el.querySelector('img');
-                const root = this.el;
-                img.src = photo.url;
-
-                let states = {
-                    scale: 1,
-                    translateX: 0,
-                    translateY: 0,
-                    tramsformOrigin: '50% 50%'
-                }
-
-                img.addEventListener('load', (e) => {
-                    EXIF.getData(img, function () {
-                        const exif = EXIF.getAllTags(this);
-                        photo.exif = {
-                            Date: exif.DateTimeOriginal.split(' ')[0].replace(/:/g, '-'),
-                            Focal: `${exif.FocalLength || '-' } mm ( 35mm film equivalent: ${exif.FocalLengthIn35mmFilm || '-' } mm )`,
-                            FNumber: exif.FNumber || '-' ,
-                            ISO: exif.ISOSpeedRatings || '-' ,
-                            ExposureTime: `${exif.ExposureTime.numerator || '-' }/${exif.ExposureTime.denominator || '-' } s`
-                        }
-                        root.querySelector('#exif-info').innerHTML = `
-                            <p>Date: ${photo.exif.Date}</p>
-                            <p>Focal: ${photo.exif.Focal}</p>
-                            <p>FNumber: ${photo.exif.FNumber}</p>
-                            <p>ISO: ${photo.exif.ISO}</p>
-                            <p>ExposureTime: ${photo.exif.ExposureTime}</p>
-                        `;
-                    });
-                });
-
-                this.el.querySelector('img').addEventListener('wheel', (e) => {
-                    // 我希望滚轮可以放大图片，并且放大的中心是鼠标所在的位置
-                    e.preventDefault();
-                    const img = this.el.querySelector('img');
-                    states.scale = (e.deltaY > 0 ? 0.8 : 1.2) * (states.scale);
-                    const rect = img.getBoundingClientRect();
-                    const percentX = (e.clientX - rect.left) / rect.width;
-                    const percentY = (e.clientY - rect.top) / rect.height;
-
-                    img.style.transform = `scale(${states.scale}) translate(${states.translateX}px, ${states.translateY}px)`;
-                    img.style.transformOrigin = `${percentX * 100}% ${percentY * 100}%`;
-                });
-
-                this.el.querySelector('img').addEventListener('mousedown', (e) => {
-                    e.preventDefault();
-
-                    const img = this.el.querySelector('img');
-                    const rect = img.getBoundingClientRect();
-                    const startX = e.clientX;
-                    const startY = e.clientY;
-                    const startTranslateX = states.translateX;
-                    const startTranslateY = states.translateY;
-
-                    const move = (e) => {
-                        const x = e.clientX - startX;
-                        const y = e.clientY - startY;
-                        states.translateX = startTranslateX + x;
-                        states.translateY = startTranslateY + y;
-
-                        img.style.transform = `scale(${states.scale}) translate(${states.translateX}px, ${states.translateY}px)`;
-                        e.target.style.cursor = 'grabbing';
-                    }
-
-                    const up = (e) => {
-                        e.target.style.cursor = null
-                        document.removeEventListener('mousemove', move);
-                        document.removeEventListener('mouseup', up);
-                    }
-
-                    document.addEventListener('mousemove', move);
-                    document.addEventListener('mouseup', up);
-                });
-
-                // 写一个二指缩放的事件
-                this.el.querySelector('img').addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    if (e.touches.length === 2) {
-                        const img = this.el.querySelector('img');
-                        const rect = img.getBoundingClientRect();
-                        const startDistance = getDistance(e.touches);
-                        const startScale = states.scale;
-
-                        document.addEventListener('touchmove', (e) => {
-                            e.preventDefault();
-                            if (e.touches.length === 2) {
-                                const distance = getDistance(e.touches);
-                                const scale = distance / startDistance * startScale;
-                                states.scale = scale;
-                                img.style.transform = `scale(${states.scale}) translate(${states.translateX}px, ${states.translateY}px)`;
-                            }
-                        });
-                        function getDistance(touches) {
-                            const dx = touches[0].clientX - touches[1].clientX;
-                            const dy = touches[0].clientY - touches[1].clientY;
-                            return Math.sqrt(dx * dx + dy * dy);
-                        }
-                        return
-                    }
-
-
-                    if (e.touches.length === 1) {
-                        const img = this.el.querySelector('img');
-                        const startX = e.touches[0].clientX;
-                        const startY = e.touches[0].clientY;
-                        const startTranslateX = states.translateX;
-                        const startTranslateY = states.translateY;
-
-                        document.addEventListener('touchmove', (e) => {
-                            e.preventDefault();
-                            if (e.touches.length === 1) {
-                                const x = e.touches[0].clientX - startX;
-                                const y = e.touches[0].clientY - startY;
-                                states.translateX = startTranslateX + x;
-                                states.translateY = startTranslateY + y;
-                                img.style.transform = `scale(${states.scale}) translate(${states.translateX}px, ${states.translateY}px)`;
-                            }
-                        });
-                        return
-                    }
-                });
-
-            }
-
-            hide() {
-                this.el.remove();
-            }
-        }
-
     </script>
 </body>
+
 </html>
