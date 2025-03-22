@@ -1,17 +1,5 @@
 [
   {
-    "name": "DSC7663-已增强-NR.jpg",
-    "url": "./photos/DSC7663-已增强-NR.jpg",
-    "thumb_url": "./photos/thumbs/DSC7663-已增强-NR.jpg",
-    "exif": {
-      "Date": "2025-03-04",
-      "Focal": "85mm",
-      "FNumber": 1.8,
-      "ISO": 360,
-      "ExposureTime": "1/100"
-    }
-  },
-  {
     "name": "P1060280-已增强-NR.jpg",
     "url": "./photos/P1060280-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/P1060280-已增强-NR.jpg",
@@ -528,15 +516,15 @@
     }
   },
   {
-    "name": "P1070343-已增强-NR.jpg",
-    "url": "./photos/P1070343-已增强-NR.jpg",
-    "thumb_url": "./photos/thumbs/P1070343-已增强-NR.jpg",
+    "name": "_DSC7663-已增强-NR.jpg",
+    "url": "./photos/_DSC7663-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/_DSC7663-已增强-NR.jpg",
     "exif": {
-      "Date": "2025-03-20",
-      "Focal": "42mm",
-      "FNumber": 14,
-      "ISO": 160,
-      "ExposureTime": "1/800"
+      "Date": "2025-03-04",
+      "Focal": "85mm",
+      "FNumber": 1.8,
+      "ISO": 360,
+      "ExposureTime": "1/100"
     }
   }
 ]
