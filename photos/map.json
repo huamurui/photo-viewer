@@ -396,6 +396,18 @@
     }
   },
   {
+    "name": "P1070149-已增强-NR_1.jpg",
+    "url": "./photos/P1070149-已增强-NR_1.jpg",
+    "thumb_url": "./photos/thumbs/P1070149-已增强-NR_1.jpg",
+    "exif": {
+      "Date": "2025-03-09",
+      "Focal": "45mm",
+      "FNumber": 9,
+      "ISO": 160,
+      "ExposureTime": "1/640"
+    }
+  },
+  {
     "name": "P1070258-已增强-NR.jpg",
     "url": "./photos/P1070258-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/P1070258-已增强-NR.jpg",
@@ -576,6 +588,18 @@
     }
   },
   {
+    "name": "P1070532-已增强-NR_1.jpg",
+    "url": "./photos/P1070532-已增强-NR_1.jpg",
+    "thumb_url": "./photos/thumbs/P1070532-已增强-NR_1.jpg",
+    "exif": {
+      "Date": "2025-03-30",
+      "Focal": "14mm",
+      "FNumber": 3.5,
+      "ISO": 640,
+      "ExposureTime": "1/25"
+    }
+  },
+  {
     "name": "P1070561-已增强-NR.jpg",
     "url": "./photos/P1070561-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/P1070561-已增强-NR.jpg",
@@ -633,6 +657,54 @@
       "FNumber": 13,
       "ISO": 160,
       "ExposureTime": "1/500"
+    }
+  },
+  {
+    "name": "P1070634-已增强-NR_1.jpg",
+    "url": "./photos/P1070634-已增强-NR_1.jpg",
+    "thumb_url": "./photos/thumbs/P1070634-已增强-NR_1.jpg",
+    "exif": {
+      "Date": "2025-04-05",
+      "Focal": "33mm",
+      "FNumber": 5.6,
+      "ISO": 800,
+      "ExposureTime": "1/60"
+    }
+  },
+  {
+    "name": "P1070643-已增强-NR.jpg",
+    "url": "./photos/P1070643-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/P1070643-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-04-05",
+      "Focal": "-mm",
+      "FNumber": "-",
+      "ISO": 320,
+      "ExposureTime": "1/125"
+    }
+  },
+  {
+    "name": "P1070653-已增强-NR.jpg",
+    "url": "./photos/P1070653-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/P1070653-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-04-05",
+      "Focal": "-mm",
+      "FNumber": "-",
+      "ISO": 160,
+      "ExposureTime": "1/200"
+    }
+  },
+  {
+    "name": "P1070672-已增强-NR.jpg",
+    "url": "./photos/P1070672-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/P1070672-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-04-05",
+      "Focal": "14mm",
+      "FNumber": 10,
+      "ISO": 160,
+      "ExposureTime": "1/800"
     }
   },
   {
