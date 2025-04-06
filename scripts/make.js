@@ -8,9 +8,26 @@ const dir = "./photos";
 const thumbsDir = "./photos/thumbs";
 const files = fs.readdirSync(dir);
 
+if (fs.existsSync(dir)) {
+    // 先清空 thumbs 目录
+    const thumbsFiles = fs.readdirSync(thumbsDir);
+    for(const file of thumbsFiles) {
+      await fs.unlinkSync(path.join(thumbsDir, file), (err) => {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log(`Deleted ${file}`);
+            }
+        });
+    }
+
+}
+
 if (!fs.existsSync(thumbsDir)) {
     fs.mkdirSync(thumbsDir);
 }
+
+
 
 const getExif = async (file) => {
     return new Promise((resolve, reject) => {
