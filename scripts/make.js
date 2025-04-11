@@ -27,7 +27,7 @@ const getExif = async (file) => {
 
 // 获取 dir 下所有文件的文件名及照片信息，存入 map.json
 const map = await Promise.all(files
-    .filter(file => file.endsWith('.jpg'))
+    .filter(file => (file.endsWith('.jpg')||file.endsWith('.JPG')) )
     .map(async file => {
         let photo = {
             name: file,
