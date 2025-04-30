@@ -107,15 +107,15 @@
         const elPhotoViewer = document.getElementById('photo-viewer');
 
         // const  sample =  {"Date":"2025-03-08","Focal":"150 mm ( 35mm film equivalent: - mm )","FNumber":5.6,"ISO":640,"ExposureTime":"1/320"}
-        elPhotoList.innerHTML = photos.map(item => `
+        elPhotoList.innerHTML = photos.reverse().map(item => `
         <div class="photo">
             <img src="${item.thumb_url}" alt="${item.name}">
             <div class="exif">
                 <div>${item.exif.Date}</div>
                 <span>${item.exif.Focal} </span>
                 <span>f/${item.exif.FNumber} </span>
-                <span>ISO${item.exif.ISO} </span>
                 <span>${item.exif.ExposureTime}</span>    
+                <span>ISO${item.exif.ISO} </span>
             </div>
 
         </div>`).join('');
