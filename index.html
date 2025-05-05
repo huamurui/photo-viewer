@@ -107,7 +107,11 @@
         const elPhotoViewer = document.getElementById('photo-viewer');
 
         // const  sample =  {"Date":"2025-03-08","Focal":"150 mm ( 35mm film equivalent: - mm )","FNumber":5.6,"ISO":640,"ExposureTime":"1/320"}
-        elPhotoList.innerHTML = photos.reverse().map(item => `
+        elPhotoList.innerHTML = photos.sort((a, b) => {
+            const dateA = new Date(a.exif.Date);
+            const dateB = new Date(b.exif.Date);
+            return dateB - dateA;
+        }).map(item => `
         <div class="photo">
             <img src="${item.thumb_url}" alt="${item.name}">
             <div class="exif">

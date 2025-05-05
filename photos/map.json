@@ -828,18 +828,6 @@
     }
   },
   {
-    "name": "P1140498-已增强-NR.jpg",
-    "url": "./photos/P1140498-已增强-NR.jpg",
-    "thumb_url": "./photos/thumbs/P1140498-已增强-NR.jpg",
-    "exif": {
-      "Date": "2025-04-22",
-      "Focal": "-mm",
-      "FNumber": "-",
-      "ISO": 500,
-      "ExposureTime": "1/125"
-    }
-  },
-  {
     "name": "P1140591-已增强-NR.jpg",
     "url": "./photos/P1140591-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/P1140591-已增强-NR.jpg",
@@ -876,6 +864,42 @@
     }
   },
   {
+    "name": "P1140686-已增强-NR.jpg",
+    "url": "./photos/P1140686-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/P1140686-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-05-01",
+      "Focal": "150mm",
+      "FNumber": 8,
+      "ISO": 160,
+      "ExposureTime": "1/1250"
+    }
+  },
+  {
+    "name": "P1140773-已增强-NR_1.jpg",
+    "url": "./photos/P1140773-已增强-NR_1.jpg",
+    "thumb_url": "./photos/thumbs/P1140773-已增强-NR_1.jpg",
+    "exif": {
+      "Date": "2025-05-02",
+      "Focal": "14mm",
+      "FNumber": 6.3,
+      "ISO": 160,
+      "ExposureTime": "1/320"
+    }
+  },
+  {
+    "name": "P1140793-已增强-NR.jpg",
+    "url": "./photos/P1140793-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/P1140793-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-05-05",
+      "Focal": "15mm",
+      "FNumber": 4.5,
+      "ISO": 160,
+      "ExposureTime": "1/160"
+    }
+  },
+  {
     "name": "_DSC7663-已增强-NR.jpg",
     "url": "./photos/_DSC7663-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/_DSC7663-已增强-NR.jpg",
@@ -885,6 +909,18 @@
       "FNumber": 1.8,
       "ISO": 360,
       "ExposureTime": "1/100"
+    }
+  },
+  {
+    "name": "_DSC7808-已增强-NR_1.jpg",
+    "url": "./photos/_DSC7808-已增强-NR_1.jpg",
+    "thumb_url": "./photos/thumbs/_DSC7808-已增强-NR_1.jpg",
+    "exif": {
+      "Date": "2025-05-01",
+      "Focal": "85mm",
+      "FNumber": 3.5,
+      "ISO": 100,
+      "ExposureTime": "1/3200"
     }
   }
 ]
