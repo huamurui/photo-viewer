@@ -924,6 +924,30 @@
     }
   },
   {
+    "name": "P1140874-已增强-NR.jpg",
+    "url": "./photos/P1140874-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/P1140874-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-05-12",
+      "Focal": "150mm",
+      "FNumber": 5.6,
+      "ISO": 5000,
+      "ExposureTime": "1/320"
+    }
+  },
+  {
+    "name": "P1140882-已增强-NR_1.jpg",
+    "url": "./photos/P1140882-已增强-NR_1.jpg",
+    "thumb_url": "./photos/thumbs/P1140882-已增强-NR_1.jpg",
+    "exif": {
+      "Date": "2025-05-12",
+      "Focal": "93mm",
+      "FNumber": 5.4,
+      "ISO": 3200,
+      "ExposureTime": "1/8"
+    }
+  },
+  {
     "name": "_DSC7663-已增强-NR.jpg",
     "url": "./photos/_DSC7663-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/_DSC7663-已增强-NR.jpg",
