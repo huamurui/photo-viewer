@@ -55,88 +55,88 @@ export default class PhotoViewer {
         this.img.srcset = `${photo.url} , ${photo.thumb_url}`; // 这里应该是 photo.thumb_url
         this.img.src = photo.url;
 
-        this.el.querySelector('img').addEventListener('wheel', (e) => {
-            // 我希望滚轮可以放大图片，并且放大的中心是鼠标所在的位置
-            e.preventDefault();
-            this.state.scale = (e.deltaY > 0 ? 0.8 : 1.2) * (this.state.scale);
+        // this.el.querySelector('img').addEventListener('wheel', (e) => {
+        //     // 我希望滚轮可以放大图片，并且放大的中心是鼠标所在的位置
+        //     e.preventDefault();
+        //     this.state.scale = (e.deltaY > 0 ? 0.8 : 1.2) * (this.state.scale);
 
             
-            // this.state.scale = (e.deltaY > 0 ? 0.8 : 1.2) * (this.state.scale);
-            const rect = this.img.getBoundingClientRect();
-            const percentX = (e.clientX - rect.left) / rect.width;
-            const percentY = (e.clientY - rect.top) / rect.height;
+        //     // this.state.scale = (e.deltaY > 0 ? 0.8 : 1.2) * (this.state.scale);
+        //     const rect = this.img.getBoundingClientRect();
+        //     const percentX = (e.clientX - rect.left) / rect.width;
+        //     const percentY = (e.clientY - rect.top) / rect.height;
 
-            this.img.style.transformOrigin = `${percentX * 100}% ${percentY * 100}%`;
-        });
+        //     this.img.style.transformOrigin = `${percentX * 100}% ${percentY * 100}%`;
+        // });
 
-        this.el.querySelector('img').addEventListener('mousedown', (e) => {
-            e.preventDefault();
-            const startX = e.clientX;
-            const startY = e.clientY;
-            const startTranslateX = this.state.translateX;
-            const startTranslateY = this.state.translateY;
+        // this.el.querySelector('img').addEventListener('mousedown', (e) => {
+        //     e.preventDefault();
+        //     const startX = e.clientX;
+        //     const startY = e.clientY;
+        //     const startTranslateX = this.state.translateX;
+        //     const startTranslateY = this.state.translateY;
 
-            const move = (e) => {
-                const x = e.clientX - startX;
-                const y = e.clientY - startY;
-                this.state.translateX = startTranslateX + x;
-                this.state.translateY = startTranslateY + y;
+        //     const move = (e) => {
+        //         const x = e.clientX - startX;
+        //         const y = e.clientY - startY;
+        //         this.state.translateX = startTranslateX + x;
+        //         this.state.translateY = startTranslateY + y;
 
-                e.target.style.cursor = 'grabbing';
-            }
+        //         e.target.style.cursor = 'grabbing';
+        //     }
 
-            const up = (e) => {
-                e.target.style.cursor = null
-                document.removeEventListener('mousemove', move);
-                document.removeEventListener('mouseup', up);
-            }
+        //     const up = (e) => {
+        //         e.target.style.cursor = null
+        //         document.removeEventListener('mousemove', move);
+        //         document.removeEventListener('mouseup', up);
+        //     }
 
-            document.addEventListener('mousemove', move);
-            document.addEventListener('mouseup', up);
-        });
+        //     document.addEventListener('mousemove', move);
+        //     document.addEventListener('mouseup', up);
+        // });
 
-        // 写一个二指缩放的事件
-        this.el.querySelector('img').addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            if (e.touches.length === 2) {
-                const startDistance = getDistance(e.touches);
-                const startScale = this.state.scale;
+        // // 写一个二指缩放的事件
+        // this.el.querySelector('img').addEventListener('touchstart', (e) => {
+        //     e.preventDefault();
+        //     if (e.touches.length === 2) {
+        //         const startDistance = getDistance(e.touches);
+        //         const startScale = this.state.scale;
 
-                document.addEventListener('touchmove', (e) => {
-                    e.preventDefault();
-                    if (e.touches.length === 2) {
-                        const distance = getDistance(e.touches);
-                        const scale = distance / startDistance * startScale;
-                        this.state.scale = scale;
-                    }
-                });
-                function getDistance(touches) {
-                    const dx = touches[0].clientX - touches[1].clientX;
-                    const dy = touches[0].clientY - touches[1].clientY;
-                    return Math.sqrt(dx * dx + dy * dy);
-                }
-                return
-            }
+        //         document.addEventListener('touchmove', (e) => {
+        //             e.preventDefault();
+        //             if (e.touches.length === 2) {
+        //                 const distance = getDistance(e.touches);
+        //                 const scale = distance / startDistance * startScale;
+        //                 this.state.scale = scale;
+        //             }
+        //         });
+        //         function getDistance(touches) {
+        //             const dx = touches[0].clientX - touches[1].clientX;
+        //             const dy = touches[0].clientY - touches[1].clientY;
+        //             return Math.sqrt(dx * dx + dy * dy);
+        //         }
+        //         return
+        //     }
 
 
-            if (e.touches.length === 1) {
-                const startX = e.touches[0].clientX;
-                const startY = e.touches[0].clientY;
-                const startTranslateX = this.state.translateX;
-                const startTranslateY = this.state.translateY;
+        //     if (e.touches.length === 1) {
+        //         const startX = e.touches[0].clientX;
+        //         const startY = e.touches[0].clientY;
+        //         const startTranslateX = this.state.translateX;
+        //         const startTranslateY = this.state.translateY;
 
-                document.addEventListener('touchmove', (e) => {
-                    e.preventDefault();
-                    if (e.touches.length === 1) {
-                        const x = e.touches[0].clientX - startX;
-                        const y = e.touches[0].clientY - startY;
-                        this.state.translateX = startTranslateX + x;
-                        this.state.translateY = startTranslateY + y;
-                    }
-                });
-                return
-            }
-        });
+        //         document.addEventListener('touchmove', (e) => {
+        //             e.preventDefault();
+        //             if (e.touches.length === 1) {
+        //                 const x = e.touches[0].clientX - startX;
+        //                 const y = e.touches[0].clientY - startY;
+        //                 this.state.translateX = startTranslateX + x;
+        //                 this.state.translateY = startTranslateY + y;
+        //             }
+        //         });
+        //         return
+        //     }
+        // });
 
     }
 
