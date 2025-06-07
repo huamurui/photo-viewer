@@ -1222,5 +1222,29 @@
       "ISO": 100,
       "ExposureTime": "1/3200"
     }
+  },
+  {
+    "name": "_DSC7832-已增强-NR.jpg",
+    "url": "./photos/_DSC7832-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/_DSC7832-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-06-06",
+      "Focal": "85mm",
+      "FNumber": 6.3,
+      "ISO": 3200,
+      "ExposureTime": "1/640"
+    }
+  },
+  {
+    "name": "_DSC7838-已增强-NR.jpg",
+    "url": "./photos/_DSC7838-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/_DSC7838-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-06-06",
+      "Focal": "85mm",
+      "FNumber": 8,
+      "ISO": 3200,
+      "ExposureTime": "1/1000"
+    }
   }
 ]
