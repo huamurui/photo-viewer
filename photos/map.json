@@ -1,5 +1,17 @@
 [
   {
+    "name": "IMG_20250613_120912.jpg",
+    "url": "./photos/IMG_20250613_120912.jpg",
+    "thumb_url": "./photos/thumbs/IMG_20250613_120912.jpg",
+    "exif": {
+      "Date": "2025-06-13",
+      "Focal": "5.43mm",
+      "FNumber": 1.8,
+      "ISO": 50,
+      "ExposureTime": "1/6400"
+    }
+  },
+  {
     "name": "P1060280-已增强-NR.jpg",
     "url": "./photos/P1060280-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/P1060280-已增强-NR.jpg",
@@ -1197,6 +1209,54 @@
       "FNumber": 5,
       "ISO": 160,
       "ExposureTime": "1/250"
+    }
+  },
+  {
+    "name": "SAM_0161-已增强-NR.jpg",
+    "url": "./photos/SAM_0161-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/SAM_0161-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-06-13",
+      "Focal": "89mm",
+      "FNumber": 7.1,
+      "ISO": 100,
+      "ExposureTime": "1/500"
+    }
+  },
+  {
+    "name": "SAM_0179.JPG",
+    "url": "./photos/SAM_0179.JPG",
+    "thumb_url": "./photos/thumbs/SAM_0179.JPG",
+    "exif": {
+      "Date": "2025-06-13",
+      "Focal": "16mm",
+      "FNumber": 6.3,
+      "ISO": 100,
+      "ExposureTime": "1/500"
+    }
+  },
+  {
+    "name": "SAM_0197_1.jpg",
+    "url": "./photos/SAM_0197_1.jpg",
+    "thumb_url": "./photos/thumbs/SAM_0197_1.jpg",
+    "exif": {
+      "Date": "2025-06-13",
+      "Focal": "16mm",
+      "FNumber": 6.3,
+      "ISO": 100,
+      "ExposureTime": "1/500"
+    }
+  },
+  {
+    "name": "SAM_0203.JPG",
+    "url": "./photos/SAM_0203.JPG",
+    "thumb_url": "./photos/thumbs/SAM_0203.JPG",
+    "exif": {
+      "Date": "2025-06-13",
+      "Focal": "16mm",
+      "FNumber": 6.3,
+      "ISO": 100,
+      "ExposureTime": "1/500"
     }
   },
   {
