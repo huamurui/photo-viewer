@@ -1452,6 +1452,18 @@
     }
   },
   {
+    "name": "SAM_0990-已增强-NR.jpg",
+    "url": "./photos/SAM_0990-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/SAM_0990-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-07-10",
+      "Focal": "200mm",
+      "FNumber": 8,
+      "ISO": 400,
+      "ExposureTime": "1/200"
+    }
+  },
+  {
     "name": "_DSC7663-已增强-NR.jpg",
     "url": "./photos/_DSC7663-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/_DSC7663-已增强-NR.jpg",
