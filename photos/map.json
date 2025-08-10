@@ -1464,6 +1464,90 @@
     }
   },
   {
+    "name": "SAM_1032.JPG",
+    "url": "./photos/SAM_1032.JPG",
+    "thumb_url": "./photos/thumbs/SAM_1032.JPG",
+    "exif": {
+      "Date": "2025-07-17",
+      "Focal": "113mm",
+      "FNumber": 9,
+      "ISO": 800,
+      "ExposureTime": "1/160"
+    }
+  },
+  {
+    "name": "SAM_1103-已增强-NR.jpg",
+    "url": "./photos/SAM_1103-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/SAM_1103-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-07-21",
+      "Focal": "200mm",
+      "FNumber": 5.6,
+      "ISO": 640,
+      "ExposureTime": "1/500"
+    }
+  },
+  {
+    "name": "SAM_1134-已增强-NR.jpg",
+    "url": "./photos/SAM_1134-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/SAM_1134-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-07-21",
+      "Focal": "16mm",
+      "FNumber": 7.1,
+      "ISO": 200,
+      "ExposureTime": "1/60"
+    }
+  },
+  {
+    "name": "SAM_1168-已增强-NR.jpg",
+    "url": "./photos/SAM_1168-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/SAM_1168-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-07-23",
+      "Focal": "200mm",
+      "FNumber": 9,
+      "ISO": 640,
+      "ExposureTime": "1/250"
+    }
+  },
+  {
+    "name": "SAM_1169.JPG",
+    "url": "./photos/SAM_1169.JPG",
+    "thumb_url": "./photos/thumbs/SAM_1169.JPG",
+    "exif": {
+      "Date": "2025-07-23",
+      "Focal": "200mm",
+      "FNumber": 9,
+      "ISO": 100,
+      "ExposureTime": "1/800"
+    }
+  },
+  {
+    "name": "SAM_1210-已增强-NR.jpg",
+    "url": "./photos/SAM_1210-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/SAM_1210-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-07-23",
+      "Focal": "50mm",
+      "FNumber": 9,
+      "ISO": 100,
+      "ExposureTime": "1/500"
+    }
+  },
+  {
+    "name": "SAM_1228-已增强-NR.jpg",
+    "url": "./photos/SAM_1228-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/SAM_1228-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-07-23",
+      "Focal": "200mm",
+      "FNumber": 9,
+      "ISO": 1250,
+      "ExposureTime": "1/250"
+    }
+  },
+  {
     "name": "_DSC7663-已增强-NR.jpg",
     "url": "./photos/_DSC7663-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/_DSC7663-已增强-NR.jpg",
