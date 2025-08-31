@@ -1248,6 +1248,18 @@
     }
   },
   {
+    "name": "SAM_0190_1.jpg",
+    "url": "./photos/SAM_0190_1.jpg",
+    "thumb_url": "./photos/thumbs/SAM_0190_1.jpg",
+    "exif": {
+      "Date": "2025-08-31",
+      "Focal": "16mm",
+      "FNumber": 5,
+      "ISO": 100,
+      "ExposureTime": "6"
+    }
+  },
+  {
     "name": "SAM_0197_1.jpg",
     "url": "./photos/SAM_0197_1.jpg",
     "thumb_url": "./photos/thumbs/SAM_0197_1.jpg",
