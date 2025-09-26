@@ -9,7 +9,11 @@
       "FNumber": 2,
       "ISO": 50,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 2736,
+    "height": 3648,
+    "thumb_width": 500,
+    "thumb_height": 667
   },
   {
     "name": "IMG_20250613_120912.jpg",
@@ -21,7 +25,11 @@
       "FNumber": 1.8,
       "ISO": 50,
       "ExposureTime": "1/6400"
-    }
+    },
+    "width": 4096,
+    "height": 3072,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "IMG_20250723_131112.jpg",
@@ -33,7 +41,11 @@
       "FNumber": 2,
       "ISO": 50,
       "ExposureTime": "1/2500"
-    }
+    },
+    "width": 2736,
+    "height": 3648,
+    "thumb_width": 500,
+    "thumb_height": 667
   },
   {
     "name": "IMG_20250903_180915.jpg",
@@ -45,7 +57,11 @@
       "FNumber": 1.8,
       "ISO": 100,
       "ExposureTime": "1/100"
-    }
+    },
+    "width": 4096,
+    "height": 3072,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060280-已增强-NR.jpg",
@@ -57,7 +73,11 @@
       "FNumber": 6.3,
       "ISO": 3200,
       "ExposureTime": "1/20"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060295-已增强-NR.jpg",
@@ -69,7 +89,11 @@
       "FNumber": 3.5,
       "ISO": 250,
       "ExposureTime": "1/60"
-    }
+    },
+    "width": 3448,
+    "height": 4592,
+    "thumb_width": 500,
+    "thumb_height": 666
   },
   {
     "name": "P1060319-已增强-NR.jpg",
@@ -81,7 +105,11 @@
       "FNumber": 4.5,
       "ISO": 160,
       "ExposureTime": "1/125"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060330-已增强-NR.jpg",
@@ -93,7 +121,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 3089,
+    "height": 1993,
+    "thumb_width": 500,
+    "thumb_height": 323
   },
   {
     "name": "P1060333-已增强-NR.jpg",
@@ -105,7 +137,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4545,
+    "height": 3037,
+    "thumb_width": 500,
+    "thumb_height": 334
   },
   {
     "name": "P1060338-已增强-NR.jpg",
@@ -117,7 +153,11 @@
       "FNumber": 5.6,
       "ISO": 250,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4264,
+    "height": 2411,
+    "thumb_width": 500,
+    "thumb_height": 282
   },
   {
     "name": "P1060407-已增强-NR.jpg",
@@ -129,7 +169,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/400"
-    }
+    },
+    "width": 3327,
+    "height": 2547,
+    "thumb_width": 500,
+    "thumb_height": 383
   },
   {
     "name": "P1060444-已增强-NR.jpg",
@@ -141,7 +185,11 @@
       "FNumber": "-",
       "ISO": 1600,
       "ExposureTime": "1/60"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060456-已增强-NR_1.jpg",
@@ -153,7 +201,11 @@
       "FNumber": 3.5,
       "ISO": 400,
       "ExposureTime": "1/60"
-    }
+    },
+    "width": 2725,
+    "height": 1534,
+    "thumb_width": 500,
+    "thumb_height": 281
   },
   {
     "name": "P1060470-已增强-NR.jpg",
@@ -165,7 +217,11 @@
       "FNumber": 6.3,
       "ISO": 800,
       "ExposureTime": "1/4000"
-    }
+    },
+    "width": 997,
+    "height": 749,
+    "thumb_width": 500,
+    "thumb_height": 376
   },
   {
     "name": "P1060515-已增强-NR.jpg",
@@ -177,7 +233,11 @@
       "FNumber": 5.6,
       "ISO": 800,
       "ExposureTime": "1/15"
-    }
+    },
+    "width": 3851,
+    "height": 2892,
+    "thumb_width": 500,
+    "thumb_height": 376
   },
   {
     "name": "P1060541-已增强-NR.jpg",
@@ -189,7 +249,11 @@
       "FNumber": 5.6,
       "ISO": 3200,
       "ExposureTime": "1/8"
-    }
+    },
+    "width": 3497,
+    "height": 2626,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060544-已增强-NR.jpg",
@@ -201,7 +265,11 @@
       "FNumber": 3.5,
       "ISO": 2500,
       "ExposureTime": "1/100"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060612-已增强-NR.jpg",
@@ -213,7 +281,11 @@
       "FNumber": 5,
       "ISO": 160,
       "ExposureTime": "1/125"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060772-已增强-NR.jpg",
@@ -225,7 +297,11 @@
       "FNumber": 4,
       "ISO": 160,
       "ExposureTime": "1/800"
-    }
+    },
+    "width": 4514,
+    "height": 3389,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060782-已增强-NR_1.jpg",
@@ -237,7 +313,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 2499,
+    "thumb_width": 500,
+    "thumb_height": 272
   },
   {
     "name": "P1060784-已增强-NR.jpg",
@@ -249,7 +329,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4556,
+    "height": 3421,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060788-已增强-NR.jpg",
@@ -261,7 +345,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060799-已增强-NR_1.jpg",
@@ -273,7 +361,11 @@
       "FNumber": 7.1,
       "ISO": 160,
       "ExposureTime": "1/400"
-    }
+    },
+    "width": 3492,
+    "height": 2926,
+    "thumb_width": 500,
+    "thumb_height": 419
   },
   {
     "name": "P1060838-已增强-NR_1.jpg",
@@ -285,7 +377,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 4528,
+    "height": 2332,
+    "thumb_width": 500,
+    "thumb_height": 257
   },
   {
     "name": "P1060856-已增强-NR.jpg",
@@ -297,7 +393,11 @@
       "FNumber": 4.5,
       "ISO": 160,
       "ExposureTime": "1/800"
-    }
+    },
+    "width": 3447,
+    "height": 4590,
+    "thumb_width": 500,
+    "thumb_height": 666
   },
   {
     "name": "P1060873-已增强-NR.jpg",
@@ -309,7 +409,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060881-已增强-NR.jpg",
@@ -321,7 +425,11 @@
       "FNumber": 8,
       "ISO": 160,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1060892-已增强-NR.jpg",
@@ -333,7 +441,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 2879,
+    "thumb_width": 500,
+    "thumb_height": 313
   },
   {
     "name": "P1060917-已增强-NR_1.jpg",
@@ -345,7 +457,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/400"
-    }
+    },
+    "width": 4497,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 383
   },
   {
     "name": "P1070026-已增强-NR.jpg",
@@ -357,7 +473,11 @@
       "FNumber": 3.5,
       "ISO": 160,
       "ExposureTime": "1/1000"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070081-已增强-NR_1.jpg",
@@ -369,7 +489,11 @@
       "FNumber": 7.1,
       "ISO": 160,
       "ExposureTime": "1/400"
-    }
+    },
+    "width": 4553,
+    "height": 3419,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070096-已增强-NR_1.jpg",
@@ -381,7 +505,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 4565,
+    "height": 3428,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070114-已增强-NR.jpg",
@@ -393,7 +521,11 @@
       "FNumber": 5.6,
       "ISO": 640,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070135-已增强-NR_1.jpg",
@@ -405,7 +537,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 3200,
+    "height": 2214,
+    "thumb_width": 500,
+    "thumb_height": 346
   },
   {
     "name": "P1070145-已增强-NR.jpg",
@@ -417,7 +553,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 2789,
+    "height": 1881,
+    "thumb_width": 500,
+    "thumb_height": 337
   },
   {
     "name": "P1070149-已增强-NR_3.jpg",
@@ -429,7 +569,11 @@
       "FNumber": 9,
       "ISO": 160,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 4460,
+    "height": 3349,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070258-已增强-NR.jpg",
@@ -441,7 +585,11 @@
       "FNumber": 5,
       "ISO": 160,
       "ExposureTime": "1/125"
-    }
+    },
+    "width": 3448,
+    "height": 4592,
+    "thumb_width": 500,
+    "thumb_height": 666
   },
   {
     "name": "P1070261-已增强-NR.jpg",
@@ -453,7 +601,11 @@
       "FNumber": 7.1,
       "ISO": 160,
       "ExposureTime": "1/800"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070263-已增强-NR.jpg",
@@ -465,7 +617,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 3437,
+    "height": 2562,
+    "thumb_width": 500,
+    "thumb_height": 373
   },
   {
     "name": "P1070270-已增强-NR.jpg",
@@ -477,7 +633,11 @@
       "FNumber": 5.6,
       "ISO": 250,
       "ExposureTime": "1/80"
-    }
+    },
+    "width": 3959,
+    "height": 3100,
+    "thumb_width": 500,
+    "thumb_height": 392
   },
   {
     "name": "P1070275-已增强-NR.jpg",
@@ -489,7 +649,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 907,
+    "height": 728,
+    "thumb_width": 500,
+    "thumb_height": 401
   },
   {
     "name": "P1070319-已增强-NR.jpg",
@@ -501,7 +665,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/160"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070330-已增强-NR.jpg",
@@ -513,7 +681,11 @@
       "FNumber": 3.5,
       "ISO": 160,
       "ExposureTime": "1/100"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070334-已增强-NR.jpg",
@@ -525,7 +697,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/160"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070335-已增强-NR.jpg",
@@ -537,7 +713,11 @@
       "FNumber": 10,
       "ISO": 160,
       "ExposureTime": "1/400"
-    }
+    },
+    "width": 4102,
+    "height": 2958,
+    "thumb_width": 500,
+    "thumb_height": 360
   },
   {
     "name": "P1070342-已增强-NR.jpg",
@@ -549,7 +729,11 @@
       "FNumber": 9,
       "ISO": 160,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 3010,
+    "height": 2562,
+    "thumb_width": 500,
+    "thumb_height": 426
   },
   {
     "name": "P1070401-已增强-NR.jpg",
@@ -561,7 +745,11 @@
       "FNumber": 6.3,
       "ISO": 800,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 4086,
+    "height": 3053,
+    "thumb_width": 500,
+    "thumb_height": 374
   },
   {
     "name": "P1070408-已增强-NR.jpg",
@@ -573,7 +761,11 @@
       "FNumber": 13,
       "ISO": 800,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070441-已增强-NR.jpg",
@@ -585,7 +777,11 @@
       "FNumber": 5.6,
       "ISO": 640,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070452-已增强-NR.jpg",
@@ -597,7 +793,11 @@
       "FNumber": 3.5,
       "ISO": 800,
       "ExposureTime": "1/8"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070491-已增强-NR.jpg",
@@ -609,7 +809,11 @@
       "FNumber": "-",
       "ISO": 3200,
       "ExposureTime": "1/10"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070532-已增强-NR_1.jpg",
@@ -621,7 +825,11 @@
       "FNumber": 3.5,
       "ISO": 640,
       "ExposureTime": "1/25"
-    }
+    },
+    "width": 3880,
+    "height": 3416,
+    "thumb_width": 500,
+    "thumb_height": 440
   },
   {
     "name": "P1070561-已增强-NR.jpg",
@@ -633,7 +841,11 @@
       "FNumber": "-",
       "ISO": 160,
       "ExposureTime": "1/50"
-    }
+    },
+    "width": 970,
+    "height": 743,
+    "thumb_width": 500,
+    "thumb_height": 383
   },
   {
     "name": "P1070627-已增强-NR.jpg",
@@ -645,7 +857,11 @@
       "FNumber": 5.6,
       "ISO": 800,
       "ExposureTime": "1/80"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070631-已增强-NR.jpg",
@@ -657,7 +873,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070632-已增强-NR.jpg",
@@ -669,7 +889,11 @@
       "FNumber": 13,
       "ISO": 160,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070634-已增强-NR_1.jpg",
@@ -681,7 +905,11 @@
       "FNumber": 5.6,
       "ISO": 800,
       "ExposureTime": "1/60"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070643-已增强-NR.jpg",
@@ -693,7 +921,11 @@
       "FNumber": "-",
       "ISO": 320,
       "ExposureTime": "1/125"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070653-已增强-NR.jpg",
@@ -705,7 +937,11 @@
       "FNumber": "-",
       "ISO": 160,
       "ExposureTime": "1/200"
-    }
+    },
+    "width": 3619,
+    "height": 2463,
+    "thumb_width": 500,
+    "thumb_height": 340
   },
   {
     "name": "P1070672-已增强-NR.jpg",
@@ -717,7 +953,11 @@
       "FNumber": 10,
       "ISO": 160,
       "ExposureTime": "1/800"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1070704-已增强-NR.jpg",
@@ -729,7 +969,11 @@
       "FNumber": 6.3,
       "ISO": 400,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 1571,
+    "height": 1075,
+    "thumb_width": 500,
+    "thumb_height": 342
   },
   {
     "name": "P1070720-已增强-NR_1.jpg",
@@ -741,7 +985,11 @@
       "FNumber": 13,
       "ISO": 160,
       "ExposureTime": "1/25"
-    }
+    },
+    "width": 2683,
+    "height": 1856,
+    "thumb_width": 500,
+    "thumb_height": 346
   },
   {
     "name": "P1140033-已增强-NR.jpg",
@@ -753,7 +1001,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140050-已增强-NR.jpg",
@@ -765,7 +1017,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140066-已增强-NR.jpg",
@@ -777,7 +1033,11 @@
       "FNumber": 7.1,
       "ISO": 160,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140074-已增强-NR_1.jpg",
@@ -789,7 +1049,11 @@
       "FNumber": 5.6,
       "ISO": 200,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 3912,
+    "height": 2657,
+    "thumb_width": 500,
+    "thumb_height": 339
   },
   {
     "name": "P1140083-已增强-NR.jpg",
@@ -801,7 +1065,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140161.JPG",
@@ -813,7 +1081,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/200"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140342-已增强-NR.jpg",
@@ -825,7 +1097,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/400"
-    }
+    },
+    "width": 4133,
+    "height": 2183,
+    "thumb_width": 500,
+    "thumb_height": 264
   },
   {
     "name": "P1140388-已增强-NR.jpg",
@@ -837,7 +1113,11 @@
       "FNumber": 9,
       "ISO": 160,
       "ExposureTime": "1/1600"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140394-已增强-NR.jpg",
@@ -849,7 +1129,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 2267,
+    "height": 1439,
+    "thumb_width": 500,
+    "thumb_height": 317
   },
   {
     "name": "P1140428-已增强-NR.jpg",
@@ -861,7 +1145,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/400"
-    }
+    },
+    "width": 2362,
+    "height": 1661,
+    "thumb_width": 500,
+    "thumb_height": 351
   },
   {
     "name": "P1140439-已增强-NR_1.jpg",
@@ -873,7 +1161,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 2280,
+    "height": 1453,
+    "thumb_width": 500,
+    "thumb_height": 318
   },
   {
     "name": "P1140454-已增强-NR_1.jpg",
@@ -885,7 +1177,11 @@
       "FNumber": 7.1,
       "ISO": 160,
       "ExposureTime": "1/1250"
-    }
+    },
+    "width": 2346,
+    "height": 1518,
+    "thumb_width": 500,
+    "thumb_height": 324
   },
   {
     "name": "P1140591-已增强-NR.jpg",
@@ -897,7 +1193,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4332,
+    "height": 3253,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140601-已增强-NR.jpg",
@@ -909,7 +1209,11 @@
       "FNumber": 5.5,
       "ISO": 1250,
       "ExposureTime": "1/200"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140657-已增强-NR.jpg",
@@ -921,7 +1225,11 @@
       "FNumber": 5.6,
       "ISO": 320,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 3849,
+    "height": 3005,
+    "thumb_width": 500,
+    "thumb_height": 390
   },
   {
     "name": "P1140686-已增强-NR.jpg",
@@ -933,7 +1241,11 @@
       "FNumber": 8,
       "ISO": 160,
       "ExposureTime": "1/1250"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140798-已增强-NR.jpg",
@@ -945,7 +1257,11 @@
       "FNumber": 5,
       "ISO": 160,
       "ExposureTime": "1/200"
-    }
+    },
+    "width": 1410,
+    "height": 1026,
+    "thumb_width": 500,
+    "thumb_height": 364
   },
   {
     "name": "P1140806-已增强-NR.jpg",
@@ -957,7 +1273,11 @@
       "FNumber": 6.3,
       "ISO": 160,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 1669,
+    "height": 1149,
+    "thumb_width": 500,
+    "thumb_height": 344
   },
   {
     "name": "P1140859-已增强-NR.jpg",
@@ -969,7 +1289,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "5"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140874-已增强-NR.jpg",
@@ -981,7 +1305,11 @@
       "FNumber": 5.6,
       "ISO": 5000,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140882-已增强-NR_1.jpg",
@@ -993,7 +1321,11 @@
       "FNumber": 5.4,
       "ISO": 3200,
       "ExposureTime": "1/8"
-    }
+    },
+    "width": 3293,
+    "height": 3239,
+    "thumb_width": 500,
+    "thumb_height": 491
   },
   {
     "name": "P1140883-已增强-NR.jpg",
@@ -1005,7 +1337,11 @@
       "FNumber": 5.6,
       "ISO": 2500,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140889-已增强-NR.jpg",
@@ -1017,7 +1353,11 @@
       "FNumber": 5.6,
       "ISO": 2000,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1140938-已增强-NR.jpg",
@@ -1029,7 +1369,11 @@
       "FNumber": 5.6,
       "ISO": 500,
       "ExposureTime": "1/1250"
-    }
+    },
+    "width": 3105,
+    "height": 2511,
+    "thumb_width": 500,
+    "thumb_height": 404
   },
   {
     "name": "P1140963_1.jpg",
@@ -1041,7 +1385,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/400"
-    }
+    },
+    "width": 3010,
+    "height": 2325,
+    "thumb_width": 500,
+    "thumb_height": 386
   },
   {
     "name": "P1140991-已增强-NR.jpg",
@@ -1053,7 +1401,11 @@
       "FNumber": 5.6,
       "ISO": 640,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 2741,
+    "height": 1993,
+    "thumb_width": 500,
+    "thumb_height": 364
   },
   {
     "name": "P1150023-已增强-NR.jpg",
@@ -1065,7 +1417,11 @@
       "FNumber": 5.6,
       "ISO": 1250,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1150048-已增强-NR.jpg",
@@ -1077,7 +1433,11 @@
       "FNumber": 5.6,
       "ISO": 1600,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1150058-已增强-NR.jpg",
@@ -1089,7 +1449,11 @@
       "FNumber": 5.5,
       "ISO": 1250,
       "ExposureTime": "1/200"
-    }
+    },
+    "width": 3050,
+    "height": 2642,
+    "thumb_width": 500,
+    "thumb_height": 433
   },
   {
     "name": "P1150074.JPG",
@@ -1101,7 +1465,11 @@
       "FNumber": 5.6,
       "ISO": 200,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1150102-已增强-NR.jpg",
@@ -1113,7 +1481,11 @@
       "FNumber": 5.6,
       "ISO": 1000,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1150115-已增强-NR.jpg",
@@ -1125,7 +1497,11 @@
       "FNumber": 5.6,
       "ISO": 1250,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 3485,
+    "height": 2531,
+    "thumb_width": 500,
+    "thumb_height": 363
   },
   {
     "name": "P1150214-已增强-NR.jpg",
@@ -1137,7 +1513,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 1555,
+    "height": 1249,
+    "thumb_width": 500,
+    "thumb_height": 402
   },
   {
     "name": "P1150230-已增强-NR.jpg",
@@ -1149,7 +1529,11 @@
       "FNumber": 7.1,
       "ISO": 160,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1150256.JPG",
@@ -1161,7 +1545,11 @@
       "FNumber": 5.6,
       "ISO": 2500,
       "ExposureTime": "1/125"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1150303-已增强-NR.jpg",
@@ -1173,7 +1561,11 @@
       "FNumber": 4,
       "ISO": 500,
       "ExposureTime": "1/1250"
-    }
+    },
+    "width": 4592,
+    "height": 3448,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1150333-已增强-NR_2.jpg",
@@ -1185,7 +1577,11 @@
       "FNumber": 4,
       "ISO": 160,
       "ExposureTime": "1/800"
-    }
+    },
+    "width": 4451,
+    "height": 3342,
+    "thumb_width": 500,
+    "thumb_height": 375
   },
   {
     "name": "P1150353-已增强-NR_1.jpg",
@@ -1197,7 +1593,11 @@
       "FNumber": 13,
       "ISO": 160,
       "ExposureTime": "1/2000"
-    }
+    },
+    "width": 2220,
+    "height": 1677,
+    "thumb_width": 500,
+    "thumb_height": 377
   },
   {
     "name": "P1150419-已增强-NR.jpg",
@@ -1209,7 +1609,11 @@
       "FNumber": 5.6,
       "ISO": 250,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 2694,
+    "height": 2012,
+    "thumb_width": 500,
+    "thumb_height": 374
   },
   {
     "name": "P1150452-已增强-NR.jpg",
@@ -1221,7 +1625,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 1690,
+    "height": 2546,
+    "thumb_width": 500,
+    "thumb_height": 753
   },
   {
     "name": "P1150456-已增强-NR.jpg",
@@ -1233,7 +1641,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 2995,
+    "height": 2108,
+    "thumb_width": 500,
+    "thumb_height": 352
   },
   {
     "name": "P1150470-已增强-NR.jpg",
@@ -1245,7 +1657,11 @@
       "FNumber": 5.6,
       "ISO": 160,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 3200,
+    "height": 2515,
+    "thumb_width": 500,
+    "thumb_height": 393
   },
   {
     "name": "P1150505-已增强-NR.jpg",
@@ -1257,7 +1673,11 @@
       "FNumber": 5,
       "ISO": 160,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 1911,
+    "height": 1307,
+    "thumb_width": 500,
+    "thumb_height": 342
   },
   {
     "name": "SAM_0161-已增强-NR.jpg",
@@ -1269,7 +1689,11 @@
       "FNumber": 7.1,
       "ISO": 100,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0179.JPG",
@@ -1281,7 +1705,11 @@
       "FNumber": 6.3,
       "ISO": 100,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0190_1.jpg",
@@ -1293,7 +1721,11 @@
       "FNumber": 5,
       "ISO": 100,
       "ExposureTime": "6"
-    }
+    },
+    "width": 5101,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 424
   },
   {
     "name": "SAM_0197_1.jpg",
@@ -1305,7 +1737,11 @@
       "FNumber": 6.3,
       "ISO": 100,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 3824,
+    "height": 2635,
+    "thumb_width": 500,
+    "thumb_height": 344
   },
   {
     "name": "SAM_0203.JPG",
@@ -1317,7 +1753,11 @@
       "FNumber": 6.3,
       "ISO": 100,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0220-已增强-NR.jpg",
@@ -1329,7 +1769,11 @@
       "FNumber": 5.6,
       "ISO": 250,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 2459,
+    "height": 1737,
+    "thumb_width": 500,
+    "thumb_height": 353
   },
   {
     "name": "SAM_0245-已增强-NR.jpg",
@@ -1341,7 +1785,11 @@
       "FNumber": 5.6,
       "ISO": 1000,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 2586,
+    "height": 2065,
+    "thumb_width": 500,
+    "thumb_height": 399
   },
   {
     "name": "SAM_0246-已增强-NR.jpg",
@@ -1353,7 +1801,11 @@
       "FNumber": 5.6,
       "ISO": 500,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 2825,
+    "height": 3783,
+    "thumb_width": 500,
+    "thumb_height": 669
   },
   {
     "name": "SAM_0260-已增强-NR.jpg",
@@ -1365,7 +1817,11 @@
       "FNumber": 5.6,
       "ISO": 200,
       "ExposureTime": "1/200"
-    }
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0317-已增强-NR.jpg",
@@ -1377,7 +1833,11 @@
       "FNumber": 5,
       "ISO": 100,
       "ExposureTime": "1/125"
-    }
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0324-已增强-NR.jpg",
@@ -1389,7 +1849,11 @@
       "FNumber": 5.6,
       "ISO": 6400,
       "ExposureTime": "1/160"
-    }
+    },
+    "width": 2812,
+    "height": 1922,
+    "thumb_width": 500,
+    "thumb_height": 341
   },
   {
     "name": "SAM_0326-已增强-NR.jpg",
@@ -1401,7 +1865,11 @@
       "FNumber": 4.5,
       "ISO": 6400,
       "ExposureTime": "1/13"
-    }
+    },
+    "width": 4207,
+    "height": 6310,
+    "thumb_width": 500,
+    "thumb_height": 750
   },
   {
     "name": "SAM_0345-已增强-NR.jpg",
@@ -1413,7 +1881,11 @@
       "FNumber": 5.6,
       "ISO": 6400,
       "ExposureTime": "1/800"
-    }
+    },
+    "width": 2937,
+    "height": 2298,
+    "thumb_width": 500,
+    "thumb_height": 391
   },
   {
     "name": "SAM_0376-已增强-NR.jpg",
@@ -1425,7 +1897,11 @@
       "FNumber": 4,
       "ISO": 500,
       "ExposureTime": "1/1000"
-    }
+    },
+    "width": 6256,
+    "height": 4171,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0415-已增强-NR.jpg",
@@ -1437,7 +1913,11 @@
       "FNumber": 4,
       "ISO": 200,
       "ExposureTime": "1/1000"
-    }
+    },
+    "width": 6287,
+    "height": 4191,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0429-已增强-NR.jpg",
@@ -1449,7 +1929,11 @@
       "FNumber": 5.6,
       "ISO": 320,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 4834,
+    "height": 3442,
+    "thumb_width": 500,
+    "thumb_height": 356
   },
   {
     "name": "SAM_0451-已增强-NR.jpg",
@@ -1461,7 +1945,11 @@
       "FNumber": 4,
       "ISO": 400,
       "ExposureTime": "1/100"
-    }
+    },
+    "width": 4320,
+    "height": 6480,
+    "thumb_width": 500,
+    "thumb_height": 750
   },
   {
     "name": "SAM_0460.JPG",
@@ -1473,7 +1961,11 @@
       "FNumber": 5.6,
       "ISO": 800,
       "ExposureTime": "1/160"
-    }
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0463-已增强-NR.jpg",
@@ -1485,7 +1977,11 @@
       "FNumber": 4,
       "ISO": 800,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 4552,
+    "height": 2125,
+    "thumb_width": 500,
+    "thumb_height": 233
   },
   {
     "name": "SAM_0493-已增强-NR.jpg",
@@ -1497,7 +1993,11 @@
       "FNumber": 4,
       "ISO": 4000,
       "ExposureTime": "1/3200"
-    }
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0496-已增强-NR.jpg",
@@ -1509,7 +2009,11 @@
       "FNumber": 5,
       "ISO": 640,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 4464,
+    "height": 3304,
+    "thumb_width": 500,
+    "thumb_height": 370
   },
   {
     "name": "SAM_0515_1.jpg",
@@ -1521,7 +2025,11 @@
       "FNumber": 5,
       "ISO": 100,
       "ExposureTime": "8"
-    }
+    },
+    "width": 4108,
+    "height": 3885,
+    "thumb_width": 500,
+    "thumb_height": 473
   },
   {
     "name": "SAM_0540-已增强-NR.jpg",
@@ -1533,7 +2041,11 @@
       "FNumber": 4.5,
       "ISO": 1600,
       "ExposureTime": "1/1000"
-    }
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0553-已增强-NR.jpg",
@@ -1545,7 +2057,11 @@
       "FNumber": 5.6,
       "ISO": 200,
       "ExposureTime": "1/160"
-    }
+    },
+    "width": 1387,
+    "height": 1228,
+    "thumb_width": 500,
+    "thumb_height": 443
   },
   {
     "name": "SAM_0603-已增强-NR.jpg",
@@ -1557,7 +2073,11 @@
       "FNumber": 5,
       "ISO": 100,
       "ExposureTime": "6"
-    }
+    },
+    "width": 2961,
+    "height": 1781,
+    "thumb_width": 500,
+    "thumb_height": 301
   },
   {
     "name": "SAM_0644-已增强-NR.jpg",
@@ -1569,7 +2089,11 @@
       "FNumber": "-",
       "ISO": 1250,
       "ExposureTime": "1/30"
-    }
+    },
+    "width": 6165,
+    "height": 4110,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0646-已增强-NR.jpg",
@@ -1581,7 +2105,11 @@
       "FNumber": "-",
       "ISO": 1000,
       "ExposureTime": "1/30"
-    }
+    },
+    "width": 6007,
+    "height": 4005,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0715_1.jpg",
@@ -1593,7 +2121,11 @@
       "FNumber": 2.4,
       "ISO": 800,
       "ExposureTime": "1/25"
-    }
+    },
+    "width": 4320,
+    "height": 6480,
+    "thumb_width": 500,
+    "thumb_height": 750
   },
   {
     "name": "SAM_0803_1.jpg",
@@ -1605,7 +2137,11 @@
       "FNumber": 10,
       "ISO": 1250,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 6033,
+    "height": 4022,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_0831-已增强-NR_1.jpg",
@@ -1617,7 +2153,11 @@
       "FNumber": 7.1,
       "ISO": 320,
       "ExposureTime": "1/320"
-    }
+    },
+    "width": 1288,
+    "height": 1149,
+    "thumb_width": 500,
+    "thumb_height": 446
   },
   {
     "name": "SAM_0990-已增强-NR.jpg",
@@ -1629,7 +2169,11 @@
       "FNumber": 8,
       "ISO": 400,
       "ExposureTime": "1/200"
-    }
+    },
+    "width": 1506,
+    "height": 1149,
+    "thumb_width": 500,
+    "thumb_height": 381
   },
   {
     "name": "SAM_1032.JPG",
@@ -1641,7 +2185,11 @@
       "FNumber": 9,
       "ISO": 800,
       "ExposureTime": "1/160"
-    }
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_1103-已增强-NR.jpg",
@@ -1653,7 +2201,11 @@
       "FNumber": 5.6,
       "ISO": 640,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 2859,
+    "height": 2608,
+    "thumb_width": 500,
+    "thumb_height": 457
   },
   {
     "name": "SAM_1134-已增强-NR.jpg",
@@ -1665,7 +2217,11 @@
       "FNumber": 7.1,
       "ISO": 200,
       "ExposureTime": "1/60"
-    }
+    },
+    "width": 6238,
+    "height": 4159,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_1168-已增强-NR.jpg",
@@ -1677,7 +2233,11 @@
       "FNumber": 9,
       "ISO": 640,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 3611,
+    "height": 3489,
+    "thumb_width": 500,
+    "thumb_height": 483
   },
   {
     "name": "SAM_1169.JPG",
@@ -1689,7 +2249,11 @@
       "FNumber": 9,
       "ISO": 100,
       "ExposureTime": "1/800"
-    }
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_1210-已增强-NR.jpg",
@@ -1701,7 +2265,11 @@
       "FNumber": 9,
       "ISO": 100,
       "ExposureTime": "1/500"
-    }
+    },
+    "width": 6335,
+    "height": 4223,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_1224.jpg",
@@ -1712,8 +2280,12 @@
       "Focal": "-mm",
       "FNumber": "-",
       "ISO": 100,
-      "ExposureTime": "NaN"
-    }
+      "ExposureTime": "-"
+    },
+    "width": 6481,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "SAM_1228-已增强-NR.jpg",
@@ -1725,7 +2297,27 @@
       "FNumber": 9,
       "ISO": 1250,
       "ExposureTime": "1/250"
-    }
+    },
+    "width": 3643,
+    "height": 2235,
+    "thumb_width": 500,
+    "thumb_height": 307
+  },
+  {
+    "name": "SAM_2590_1.jpg",
+    "url": "./photos/SAM_2590_1.jpg",
+    "thumb_url": "./photos/thumbs/SAM_2590_1.jpg",
+    "exif": {
+      "Date": "2025-09-25",
+      "Focal": "16mm",
+      "FNumber": 5,
+      "ISO": 100,
+      "ExposureTime": "3"
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
   },
   {
     "name": "_DSC7663-已增强-NR.jpg",
@@ -1737,7 +2329,11 @@
       "FNumber": 1.8,
       "ISO": 360,
       "ExposureTime": "1/100"
-    }
+    },
+    "width": 4016,
+    "height": 6016,
+    "thumb_width": 500,
+    "thumb_height": 749
   },
   {
     "name": "_DSC7808-已增强-NR_1.jpg",
@@ -1749,7 +2345,11 @@
       "FNumber": 3.5,
       "ISO": 100,
       "ExposureTime": "1/3200"
-    }
+    },
+    "width": 3910,
+    "height": 5668,
+    "thumb_width": 500,
+    "thumb_height": 725
   },
   {
     "name": "_DSC7832-已增强-NR.jpg",
@@ -1761,7 +2361,11 @@
       "FNumber": 6.3,
       "ISO": 3200,
       "ExposureTime": "1/640"
-    }
+    },
+    "width": 3938,
+    "height": 5899,
+    "thumb_width": 500,
+    "thumb_height": 749
   },
   {
     "name": "_DSC7838-已增强-NR.jpg",
@@ -1773,6 +2377,10 @@
       "FNumber": 8,
       "ISO": 3200,
       "ExposureTime": "1/1000"
-    }
+    },
+    "width": 5603,
+    "height": 3740,
+    "thumb_width": 500,
+    "thumb_height": 334
   }
 ]
