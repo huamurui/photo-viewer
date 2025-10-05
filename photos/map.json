@@ -2320,6 +2320,38 @@
     "thumb_height": 333
   },
   {
+    "name": "SAM_3252.JPG",
+    "url": "./photos/SAM_3252.JPG",
+    "thumb_url": "./photos/thumbs/SAM_3252.JPG",
+    "exif": {
+      "Date": "2025-10-05",
+      "Focal": "16mm",
+      "FNumber": 9,
+      "ISO": 100,
+      "ExposureTime": "1/400"
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
+  },
+  {
+    "name": "SAM_3293.JPG",
+    "url": "./photos/SAM_3293.JPG",
+    "thumb_url": "./photos/thumbs/SAM_3293.JPG",
+    "exif": {
+      "Date": "2025-10-05",
+      "Focal": "16mm",
+      "FNumber": 9,
+      "ISO": 100,
+      "ExposureTime": "1/320"
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
+  },
+  {
     "name": "_DSC7663-已增强-NR.jpg",
     "url": "./photos/_DSC7663-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/_DSC7663-已增强-NR.jpg",
