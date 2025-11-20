@@ -72,6 +72,7 @@ const map = await Promise.all(files
 
             // 获取并处理EXIF信息
             const exif = await getExif(filePath);
+            console.log(exif)
             photo.exif = {
                 Date: exif?.DateTimeOriginal ? exif.DateTimeOriginal.split(' ')[0].replace(/:/g, '-') : '-',
                 Focal: `${exif?.FocalLength || '-'}mm`,

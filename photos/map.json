@@ -2144,6 +2144,22 @@
     "thumb_height": 333
   },
   {
+    "name": "SAM_0815_1.jpg",
+    "url": "./photos/SAM_0815_1.jpg",
+    "thumb_url": "./photos/thumbs/SAM_0815_1.jpg",
+    "exif": {
+      "Date": "2025-09-17",
+      "Focal": "16mm",
+      "FNumber": 10,
+      "ISO": 100,
+      "ExposureTime": "4"
+    },
+    "width": 6480,
+    "height": 4195,
+    "thumb_width": 500,
+    "thumb_height": 323
+  },
+  {
     "name": "SAM_0831-已增强-NR_1.jpg",
     "url": "./photos/SAM_0831-已增强-NR_1.jpg",
     "thumb_url": "./photos/thumbs/SAM_0831-已增强-NR_1.jpg",
@@ -2320,6 +2336,38 @@
     "thumb_height": 333
   },
   {
+    "name": "SAM_3169-已增强-NR.jpg",
+    "url": "./photos/SAM_3169-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/SAM_3169-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-10-04",
+      "Focal": "16mm",
+      "FNumber": 2.4,
+      "ISO": 2000,
+      "ExposureTime": "1/30"
+    },
+    "width": 6268,
+    "height": 4179,
+    "thumb_width": 500,
+    "thumb_height": 333
+  },
+  {
+    "name": "SAM_3177-已增强-NR.jpg",
+    "url": "./photos/SAM_3177-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/SAM_3177-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-10-04",
+      "Focal": "16mm",
+      "FNumber": 2.4,
+      "ISO": 2000,
+      "ExposureTime": "1/30"
+    },
+    "width": 3737,
+    "height": 5605,
+    "thumb_width": 500,
+    "thumb_height": 750
+  },
+  {
     "name": "SAM_3252.JPG",
     "url": "./photos/SAM_3252.JPG",
     "thumb_url": "./photos/thumbs/SAM_3252.JPG",
@@ -2352,6 +2400,54 @@
     "thumb_height": 333
   },
   {
+    "name": "SAM_3349-已增强-NR.jpg",
+    "url": "./photos/SAM_3349-已增强-NR.jpg",
+    "thumb_url": "./photos/thumbs/SAM_3349-已增强-NR.jpg",
+    "exif": {
+      "Date": "2025-10-13",
+      "Focal": "16mm",
+      "FNumber": 7.1,
+      "ISO": 1250,
+      "ExposureTime": "1/30"
+    },
+    "width": 4038,
+    "height": 5257,
+    "thumb_width": 500,
+    "thumb_height": 651
+  },
+  {
+    "name": "SAM_3354_1.jpg",
+    "url": "./photos/SAM_3354_1.jpg",
+    "thumb_url": "./photos/thumbs/SAM_3354_1.jpg",
+    "exif": {
+      "Date": "2025-10-19",
+      "Focal": "16mm",
+      "FNumber": 3.5,
+      "ISO": 100,
+      "ExposureTime": "1/30"
+    },
+    "width": 3300,
+    "height": 2103,
+    "thumb_width": 500,
+    "thumb_height": 318
+  },
+  {
+    "name": "SAM_3356_1.jpg",
+    "url": "./photos/SAM_3356_1.jpg",
+    "thumb_url": "./photos/thumbs/SAM_3356_1.jpg",
+    "exif": {
+      "Date": "2025-10-24",
+      "Focal": "16mm",
+      "FNumber": 2.4,
+      "ISO": 100,
+      "ExposureTime": "1/30"
+    },
+    "width": 3143,
+    "height": 2294,
+    "thumb_width": 500,
+    "thumb_height": 365
+  },
+  {
     "name": "_DSC7663-已增强-NR.jpg",
     "url": "./photos/_DSC7663-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/_DSC7663-已增强-NR.jpg",
@@ -2366,6 +2462,22 @@
     "height": 6016,
     "thumb_width": 500,
     "thumb_height": 749
+  },
+  {
+    "name": "_DSC7758-已增强-NR-1_1.jpg",
+    "url": "./photos/_DSC7758-已增强-NR-1_1.jpg",
+    "thumb_url": "./photos/thumbs/_DSC7758-已增强-NR-1_1.jpg",
+    "exif": {
+      "Date": "2025-04-05",
+      "Focal": "85mm",
+      "FNumber": 2.8,
+      "ISO": 1600,
+      "ExposureTime": "1/125"
+    },
+    "width": 3426,
+    "height": 5370,
+    "thumb_width": 500,
+    "thumb_height": 784
   },
   {
     "name": "_DSC7808-已增强-NR_1.jpg",
