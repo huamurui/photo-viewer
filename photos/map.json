@@ -2448,6 +2448,22 @@
     "thumb_height": 365
   },
   {
+    "name": "SAM_3487_1.jpg",
+    "url": "./photos/SAM_3487_1.jpg",
+    "thumb_url": "./photos/thumbs/SAM_3487_1.jpg",
+    "exif": {
+      "Date": "2025-11-22",
+      "Focal": "-mm",
+      "FNumber": "-",
+      "ISO": 200,
+      "ExposureTime": "1/60"
+    },
+    "width": 5618,
+    "height": 3333,
+    "thumb_width": 500,
+    "thumb_height": 296
+  },
+  {
     "name": "_DSC7663-已增强-NR.jpg",
     "url": "./photos/_DSC7663-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/_DSC7663-已增强-NR.jpg",
