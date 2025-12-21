@@ -2512,6 +2512,22 @@
     "thumb_height": 333
   },
   {
+    "name": "SAM_3717_1.jpg",
+    "url": "./photos/SAM_3717_1.jpg",
+    "thumb_url": "./photos/thumbs/SAM_3717_1.jpg",
+    "exif": {
+      "Date": "2025-12-21",
+      "Focal": "-mm",
+      "FNumber": "-",
+      "ISO": 100,
+      "ExposureTime": "1/250"
+    },
+    "width": 6480,
+    "height": 4320,
+    "thumb_width": 500,
+    "thumb_height": 333
+  },
+  {
     "name": "_DSC7663-已增强-NR.jpg",
     "url": "./photos/_DSC7663-已增强-NR.jpg",
     "thumb_url": "./photos/thumbs/_DSC7663-已增强-NR.jpg",
