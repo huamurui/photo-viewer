@@ -4,103 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Photos of HMR</title>
+    <title>Photos of HMR (Virtual Masonry)</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             background-color: #f5f5f7;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            /* 保证页面出现滚动条但不会横向抖动 */
+            overflow-y: scroll;
+            overflow-x: hidden;
         }
 
-        h1 {
-            text-align: center;
-            font-weight: 600;
-            margin: 30px 0;
-            color: #333;
-        }
+        h1 { text-align: center; font-weight: 600; margin: 30px 0; color: #333; }
 
-        #playground {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
+        #playground { max-width: 1400px; margin: 0 auto; padding: 0 15px; }
 
-        /* 纯 JS 瀑布流的 Flex 布局基础 */
+        /* 虚拟列表容器必须是 relative，并且由 JS 设置准确的高度 */
         #photo-list {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-        }
-
-        /* 独立的一列，相互互不影响，彻底解决串列抖动 */
-        .masonry-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            /* 防止图片加载前列宽被挤压 */
-            min-width: 0; 
+            position: relative;
+            width: 100%;
+            /* 采用 3D 加速 */
+            transform: translateZ(0);
         }
 
         .photo-card {
+            /* 绝对定位，脱离文档流 */
+            position: absolute;
+            top: 0; left: 0;
             background: #fff;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* 去掉 left/top 的动画，改用 transform 定位以获取硬件加速 */
+            will-change: transform; 
             cursor: pointer;
-            /* 加入渐隐渐现，让追加更丝滑 */
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
+            transition: box-shadow 0.3s ease;
         }
 
         .photo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
         .photo-card img {
             width: 100%;
             display: block;
-            background-color: #eaeaea; /* 加载时的占位色 */
+            background-color: #eaeaea;
+            object-fit: cover;
         }
 
+        /* 为了精准计算，我们必须锁死底部描述文本区域的高度 */
         .exif {
+            height: 90px; 
+            box-sizing: border-box;
             padding: 12px;
             font-size: 13px;
             color: #666;
             line-height: 1.6;
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            align-content: flex-start;
+            gap: 6px;
         }
 
-        .exif .date { width: 100%; font-weight: bold; color: #333; margin-bottom: 4px; }
-        .exif span { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+        .exif .date { width: 100%; font-weight: bold; color: #333; margin-bottom: 2px; }
+        .exif span { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
 
         #loading-sentinel {
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #888;
-            font-size: 14px;
-            margin-top: 20px;
+            height: 80px; display: flex; justify-content: center;
+            align-items: center; color: #888; font-size: 14px; margin-top: 20px;
         }
         
         .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3498db;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            margin-right: 10px;
+            border: 3px solid #f3f3f3; border-top: 3px solid #3498db;
+            border-radius: 50%; width: 20px; height: 20px;
+            animation: spin 1s linear infinite; margin-right: 10px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
@@ -122,19 +100,22 @@
         const elPhotoList = document.getElementById('photo-list');
         const elSentinel = document.getElementById('loading-sentinel');
 
-        // 按日期降序排序
         const sortedPhotos = photos.sort((a, b) => new Date(b.exif.Date) - new Date(a.exif.Date));
         
-        const PAGE_SIZE = 15;
-        let currentIndex = 0;
-        let isFetching = false;
-        
-        // 瀑布流列的控制
-        let currentCols = 1;
-        let columnDOMs = [];
-        let columnHeights = []; // 维护一个虚拟高度数组
+        // ---- 虚拟列表核心状态 ----
+        const state = {
+            items: [],           // 存放计算好坐标的图片对象 { data, x, y, w, h }
+            renderedNodes: new Map(), // 存放当前在页面上的 DOM 节点 [index -> HTMLElement]
+            colsHeight: [],      // 每列的当前高度
+            colCount: 1,         // 当前列数
+            containerWidth: 0,   // 容器总宽度
+            gap: 20,             // 间距
+            exifHeight: 90,      // 写死在 CSS 中的 Exif 区域高度
+            buffer: 800,         // 上下预渲染的缓冲区域(像素)，防止滑动太快白屏
+            currentIndex: 0,
+            isFetching: false
+        };
 
-        // 根据屏幕宽度计算应该显示几列
         function getColumnCount() {
             const w = window.innerWidth;
             if (w >= 1200) return 4;
@@ -143,133 +124,187 @@
             return 1;
         }
 
-        // 初始化/重置瀑布流结构
-        function initLayout() {
-            currentCols = getColumnCount();
-            elPhotoList.innerHTML = '';
-            columnDOMs = [];
-            columnHeights = new Array(currentCols).fill(0);
+        // 1. 全局数学排版引擎：计算每一张照片所在的 X、Y 坐标和宽高
+        function computeLayout(startIndex = 0) {
+            state.containerWidth = elPhotoList.clientWidth;
+            const colWidth = (state.containerWidth - (state.colCount - 1) * state.gap) / state.colCount;
 
-            for (let i = 0; i < currentCols; i++) {
-                const col = document.createElement('div');
-                col.className = 'masonry-column';
-                elPhotoList.appendChild(col);
-                columnDOMs.push(col);
+            // 如果从 0 开始计算，清空列高度并重置 DOM
+            if (startIndex === 0) {
+                state.colsHeight = new Array(state.colCount).fill(0);
+                state.renderedNodes.forEach(node => node.remove());
+                state.renderedNodes.clear();
             }
+
+            for (let i = startIndex; i < state.items.length; i++) {
+                const item = state.items[i];
+                
+                // 寻找最短的那一列
+                let minCol = 0;
+                let minH = state.colsHeight[0];
+                for (let c = 1; c < state.colCount; c++) {
+                    if (state.colsHeight[c] < minH) {
+                        minH = state.colsHeight[c];
+                        minCol = c;
+                    }
+                }
+
+                // 核心坐标分配
+                item.w = colWidth;
+                const imgH = colWidth * item.data._ratio;
+                item.h = imgH + state.exifHeight;
+                item.x = minCol * (colWidth + state.gap);
+                item.y = minH;
+
+                // 更新此列的高度
+                state.colsHeight[minCol] = minH + item.h + state.gap;
+            }
+
+            // 更新容器的实际占位总高度，以此来撑开滚动条
+            const totalHeight = Math.max(...state.colsHeight, 0);
+            elPhotoList.style.height = `${totalHeight}px`;
         }
 
-        // 核心渲染方法：找当前最短的列，并插入 DOM
-        function renderItem(item, index) {
-            // 找到当前高度最短的列
-            let minColIndex = 0;
-            let minHeight = columnHeights[0];
-            for (let i = 1; i < currentCols; i++) {
-                if (columnHeights[i] < minHeight) {
-                    minHeight = columnHeights[i];
-                    minColIndex = i;
+        // 2. 核心渲染引擎：对比视口，动态挂载或卸载 DOM
+        function renderViewport() {
+            const scrollY = window.scrollY;
+            const viewportH = window.innerHeight;
+            
+            // 计算当前视野的有效区间
+            const minVisibleY = scrollY - state.buffer;
+            const maxVisibleY = scrollY + viewportH + state.buffer;
+
+            const visibleIndices = new Set();
+
+            // 筛选出在可视区间内的图片项
+            for (let i = 0; i < state.items.length; i++) {
+                const item = state.items[i];
+                // 如果底边 > 可视上界，且 顶边 < 可视下界，说明进入屏幕
+                if (item.y + item.h > minVisibleY && item.y < maxVisibleY) {
+                    visibleIndices.add(i);
                 }
             }
 
-            const card = document.createElement('div');
-            card.className = 'photo-card';
-            
-            // 为了防止图片在渲染时改变卡片高度，利用预计算的比例锁定图片高度 (通过 aspectRatio)
-            const aspectRatio = item._ratio ? item._ratio : 0.75; // 兜底比例
-            
-            card.innerHTML = `
-                <img src="${item.thumb_url}" alt="${item.name}" 
-                     style="aspect-ratio: 1 / ${aspectRatio};" 
-                     loading="lazy" data-index="${index}">
-                <div class="exif">
-                    <div class="date">${item.exif.Date}</div>
-                    <span>${item.exif.Focal}</span>
-                    <span>f/${item.exif.FNumber}</span>
-                    <span>${item.exif.ExposureTime}</span>    
-                    <span>ISO${item.exif.ISO}</span>
-                </div>
-            `;
+            // [Diff 过程 1]：销毁滚出视口的旧节点
+            for (const [index, node] of state.renderedNodes.entries()) {
+                if (!visibleIndices.has(index)) {
+                    node.remove(); // 从 DOM 中移除
+                    state.renderedNodes.delete(index);
+                }
+            }
 
-            columnDOMs[minColIndex].appendChild(card);
-
-            // 更新虚拟高度（图片高度 + Exif信息卡片大约估算的常数高度 + gap边距）
-            // 这样不用等 DOM 重绘完成就能知道大致高度，确保连续追加时均衡分布
-            const columnWidth = columnDOMs[minColIndex].clientWidth || 300;
-            columnHeights[minColIndex] += (columnWidth * aspectRatio) + 120 + 20; 
+            // [Diff 过程 2]：挂载滚入视口的新节点
+            for (const index of visibleIndices) {
+                if (!state.renderedNodes.has(index)) {
+                    const item = state.items[index];
+                    const node = document.createElement('div');
+                    node.className = 'photo-card';
+                    
+                    // 用 transform 代替 top/left，GPU 加速，滑动完全不掉帧
+                    node.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
+                    node.style.width = `${item.w}px`;
+                    node.style.height = `${item.h}px`;
+                    
+                    const p = item.data;
+                    const imgH = item.h - state.exifHeight;
+                    
+                    node.innerHTML = `
+                        <img src="${p.thumb_url}" alt="${p.name}" style="height: ${imgH}px" data-index="${index}">
+                        <div class="exif">
+                            <div class="date">${p.exif.Date}</div>
+                            <span>${p.exif.Focal}</span>
+                            <span>f/${p.exif.FNumber}</span>
+                            <span>${p.exif.ExposureTime}</span>    
+                            <span>ISO${p.exif.ISO}</span>
+                        </div>
+                    `;
+                    elPhotoList.appendChild(node);
+                    state.renderedNodes.set(index, node);
+                }
+            }
         }
 
-        // 加载下一页
+        // 监听滚动事件并使用 requestAnimationFrame 节流
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    renderViewport();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // 3. 数据加载流
+        const PAGE_SIZE = 20; // 有了虚拟列表，一页加载多点也毫无压力
         async function loadNextPage() {
-            if (isFetching || currentIndex >= sortedPhotos.length) return;
-            isFetching = true;
+            if (state.isFetching || state.currentIndex >= sortedPhotos.length) return;
+            state.isFetching = true;
             elSentinel.style.display = 'flex';
 
-            const end = Math.min(currentIndex + PAGE_SIZE, sortedPhotos.length);
-            const batch = sortedPhotos.slice(currentIndex, end);
+            const end = Math.min(state.currentIndex + PAGE_SIZE, sortedPhotos.length);
+            const batch = sortedPhotos.slice(state.currentIndex, end);
 
-            // 杀手锏：并发预加载这一批图片的尺寸，不让其阻塞渲染顺序
-            // 目的是拿到每一张照片的高宽比 _ratio
-            await Promise.all(batch.map(item => {
+            // 获取这一批图片的宽高比例
+            await Promise.all(batch.map(p => {
                 return new Promise(resolve => {
-                    if (item._ratio) return resolve(); // 已经有缓存了
-                    
+                    if (p._ratio) return resolve();
                     const img = new Image();
-                    img.onload = () => {
-                        item._ratio = img.naturalHeight / img.naturalWidth;
-                        resolve();
-                    };
-                    img.onerror = () => {
-                        item._ratio = 0.75; // 失败的话给个默认横图比例
-                        resolve();
-                    };
-                    img.src = item.thumb_url;
+                    img.onload = () => { p._ratio = img.naturalHeight / img.naturalWidth; resolve(); };
+                    img.onerror = () => { p._ratio = 0.75; resolve(); };
+                    img.src = p.thumb_url;
                 });
             }));
 
-            // 所有图片的比例都拿到了，开始同步渲染并插入最短列
-            batch.forEach((item, i) => {
-                renderItem(item, currentIndex + i);
+            // 装填到虚拟数组中
+            const prevLength = state.items.length;
+            batch.forEach((p, i) => {
+                state.items.push({ data: p, x: 0, y: 0, w: 0, h: 0 });
             });
 
-            currentIndex = end;
-            isFetching = false;
+            // 触发排版与渲染
+            computeLayout(prevLength); // 仅计算新增部分的坐标
+            renderViewport();          // 重新 diff 视口
 
-            if (currentIndex >= sortedPhotos.length) {
+            state.currentIndex = end;
+            state.isFetching = false;
+
+            if (state.currentIndex >= sortedPhotos.length) {
                 elSentinel.innerHTML = '<span>没有更多图片了</span>';
                 observer.disconnect();
             }
         }
 
-        // 监听滚动懒加载
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                loadNextPage();
-            }
-        }, { rootMargin: '400px' }); // 提前一点加载，体验更好
-
-        // 监听窗口尺寸变化，如果列数变了就重新排列
+        // 监听窗口尺寸变化：所有坐标需推倒重来
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
-                if (getColumnCount() !== currentCols) {
-                    initLayout();
-                    // 将已经加载过的数据快速重排 (因为图片 _ratio 已经缓存，所以速度极快)
-                    const renderedPhotos = sortedPhotos.slice(0, currentIndex);
-                    renderedPhotos.forEach((item, i) => renderItem(item, i));
-                }
-            }, 200); // 简单防抖
+                const newColCount = getColumnCount();
+                // 如果列数变了，或者屏幕宽度变了(导致列宽变了)，则必须全量重算
+                state.colCount = newColCount;
+                computeLayout(0); // 传0代表全量重新计算坐标
+                renderViewport(); // 重新渲染当前视口
+            }, 150);
         });
 
-        // 事件委托：图片查看器
+        // 无限滚动侦测器
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) loadNextPage();
+        }, { rootMargin: '600px' });
+
+        // 图片点击查看器绑定
         elPhotoList.addEventListener('click', (e) => {
             if (e.target.tagName === 'IMG') {
-                const index = e.target.getAttribute('data-index');
-                new PhotoViewer(sortedPhotos[index], e.target);
+                const index = parseInt(e.target.getAttribute('data-index'));
+                const item = state.items[index];
+                new PhotoViewer(item.data, e.target);
             }
         });
 
-        // 初始化
-        initLayout();
+        // 初始化运行
+        state.colCount = getColumnCount();
         observer.observe(elSentinel);
     </script>
 </body>
