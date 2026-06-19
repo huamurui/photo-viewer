@@ -4,67 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Photos of HMR (Virtual Masonry)</title>
+    
+    <!-- ================= SEO ================= -->
+    <title>Photos of HMR</title>
+    <meta name="description" content="看看我拍的照片">
+    <meta name="keywords" content="摄影, 照片墙, 画廊, 瀑布流, 虚拟列表, Exif, Photography, Gallery, HMR">
+    <meta name="author" content="HMR">
+    <meta name="robots" content="index, follow">
+    <!-- 声明规范链接，防止带参数的链接分散权重 -->
+    <link rel="canonical" href="https://huamurui.github.io/photo-viewer/">
+
+    <!-- ================= Open Graph (社交分享优化) ================= -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://huamurui.github.io/photo-viewer/">
+    <meta property="og:title" content="Photos of HMR">
+    <meta property="og:description" content="看看我拍的照片。">
+    <!-- 建议替换为你最满意的一张照片的缩略图链接作为分享封面 -->
+    <meta property="og:image" content="https://huamurui.github.io/photo-viewer/photos/cover.jpg">
+    <meta property="og:site_name" content="Photos of HMR">
+
+    <!-- ================= Twitter Cards ================= -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://huamurui.github.io/photo-viewer/">
+    <meta name="twitter:title" content="Photos of HMR">
+    <meta name="twitter:description" content="看看我拍的照片。">
+    <meta name="twitter:image" content="https://huamurui.github.io/photo-viewer/photos/cover.jpg">
+
+    <!-- ================= JSON-LD 结构化数据 (向搜索引擎声明画廊身份) ================= -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ImageGallery",
+      "name": "Photos of HMR",
+      "description": "个人摄影作品集，记录风景、人物与生活。",
+      "url": "https://huamurui.github.io/photo-viewer/",
+      "author": {
+        "@type": "Person",
+        "name": "HMR"
+      }
+    }
+    </script>
+
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f7;
+            margin: 0; padding: 0; background-color: #f5f5f7;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            /* 保证页面出现滚动条但不会横向抖动 */
-            overflow-y: scroll;
-            overflow-x: hidden;
+            overflow-y: scroll; overflow-x: hidden;
         }
 
-        h1 { text-align: center; font-weight: 600; margin: 30px 0; color: #333; }
+        /* 语义化 Header 样式 */
+        header { text-align: center; margin: 30px 0; }
+        header h1 { font-weight: 600; color: #333; margin: 0 0 10px 0; }
+        header p { color: #666; font-size: 14px; margin: 0; }
 
         #playground { max-width: 1400px; margin: 0 auto; padding: 0 15px; }
 
-        /* 虚拟列表容器必须是 relative，并且由 JS 设置准确的高度 */
         #photo-list {
-            position: relative;
-            width: 100%;
-            /* 采用 3D 加速 */
-            transform: translateZ(0);
+            position: relative; width: 100%; transform: translateZ(0);
         }
 
         .photo-card {
-            /* 绝对定位，脱离文档流 */
-            position: absolute;
-            top: 0; left: 0;
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
+            position: absolute; top: 0; left: 0;
+            background: #fff; border-radius: 12px; overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            /* 去掉 left/top 的动画，改用 transform 定位以获取硬件加速 */
-            will-change: transform; 
-            cursor: pointer;
-            transition: box-shadow 0.3s ease;
+            will-change: transform; cursor: pointer; transition: box-shadow 0.3s ease;
         }
 
-        .photo-card:hover {
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
+        .photo-card:hover { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
 
         .photo-card img {
-            width: 100%;
-            display: block;
-            background-color: #eaeaea;
-            object-fit: cover;
+            width: 100%; display: block; background-color: #eaeaea; object-fit: cover;
         }
 
-        /* 为了精准计算，我们必须锁死底部描述文本区域的高度 */
         .exif {
-            height: 90px; 
-            box-sizing: border-box;
-            padding: 12px;
-            font-size: 13px;
-            color: #666;
-            line-height: 1.6;
-            display: flex;
-            flex-wrap: wrap;
-            align-content: flex-start;
-            gap: 6px;
+            height: 90px; box-sizing: border-box; padding: 12px; font-size: 13px; color: #666;
+            line-height: 1.6; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 6px;
         }
 
         .exif .date { width: 100%; font-weight: bold; color: #333; margin-bottom: 2px; }
@@ -81,39 +95,52 @@
             animation: spin 1s linear infinite; margin-right: 10px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* 纯文本提示样式 */
+        .noscript-msg {
+            text-align: center; color: #e74c3c; padding: 20px; font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
-    <div id="playground">
-        <h1>Photos of HMR</h1>
-        <div id="photo-list"></div>
-        <div id="loading-sentinel">
+    <!-- 对不执行 JS 的老旧爬虫提供的内容备用方案 -->
+    <noscript>
+        <div class="noscript-msg">
+            网站启用 JavaScript 才能正常浏览。Please enable JavaScript to view the high-performance photo gallery.
+        </div>
+    </noscript>
+
+    <!-- 采用语义化的标签 main 代替 div -->
+    <main id="playground">
+        <header>
+            <h1>Photos of HMR</h1>
+        </header>
+
+        <!-- 虚拟列表容器 -->
+        <div id="photo-list" role="list"></div>
+        
+        <div id="loading-sentinel" aria-live="polite">
             <div class="loader"></div> <span>Loading...</span>
         </div>
-    </div>
+    </main>
 
     <script type="module">
         import photos from './photos/map.json' with { type: "json" };
         import PhotoViewer from './viewer.js';
+
+        // 统一处理图片路径前缀，防 GitHub Pages 根域名映射丢失
+        const formatUrl = (url) => (url && url.startsWith('/')) ? `.${url}` : url;
 
         const elPhotoList = document.getElementById('photo-list');
         const elSentinel = document.getElementById('loading-sentinel');
 
         const sortedPhotos = photos.sort((a, b) => new Date(b.exif.Date) - new Date(a.exif.Date));
         
-        // ---- 虚拟列表核心状态 ----
         const state = {
-            items: [],           // 存放计算好坐标的图片对象 { data, x, y, w, h }
-            renderedNodes: new Map(), // 存放当前在页面上的 DOM 节点 [index -> HTMLElement]
-            colsHeight: [],      // 每列的当前高度
-            colCount: 1,         // 当前列数
-            containerWidth: 0,   // 容器总宽度
-            gap: 20,             // 间距
-            exifHeight: 90,      // 写死在 CSS 中的 Exif 区域高度
-            buffer: 800,         // 上下预渲染的缓冲区域(像素)，防止滑动太快白屏
-            currentIndex: 0,
-            isFetching: false
+            items: [], renderedNodes: new Map(), colsHeight: [],
+            colCount: 1, containerWidth: 0, gap: 20, exifHeight: 90, buffer: 1000,
+            currentIndex: 0, isFetching: false
         };
 
         function getColumnCount() {
@@ -124,12 +151,10 @@
             return 1;
         }
 
-        // 1. 全局数学排版引擎：计算每一张照片所在的 X、Y 坐标和宽高
         function computeLayout(startIndex = 0) {
             state.containerWidth = elPhotoList.clientWidth;
             const colWidth = (state.containerWidth - (state.colCount - 1) * state.gap) / state.colCount;
 
-            // 如果从 0 开始计算，清空列高度并重置 DOM
             if (startIndex === 0) {
                 state.colsHeight = new Array(state.colCount).fill(0);
                 state.renderedNodes.forEach(node => node.remove());
@@ -138,69 +163,56 @@
 
             for (let i = startIndex; i < state.items.length; i++) {
                 const item = state.items[i];
+                let minCol = 0; let minH = state.colsHeight[0];
                 
-                // 寻找最短的那一列
-                let minCol = 0;
-                let minH = state.colsHeight[0];
                 for (let c = 1; c < state.colCount; c++) {
                     if (state.colsHeight[c] < minH) {
-                        minH = state.colsHeight[c];
-                        minCol = c;
+                        minH = state.colsHeight[c]; minCol = c;
                     }
                 }
 
-                // 核心坐标分配
                 item.w = colWidth;
-                const imgH = colWidth * item.data._ratio;
-                item.h = imgH + state.exifHeight;
+                item.h = (colWidth * item.data._ratio) + state.exifHeight;
                 item.x = minCol * (colWidth + state.gap);
                 item.y = minH;
 
-                // 更新此列的高度
                 state.colsHeight[minCol] = minH + item.h + state.gap;
             }
 
-            // 更新容器的实际占位总高度，以此来撑开滚动条
             const totalHeight = Math.max(...state.colsHeight, 0);
             elPhotoList.style.height = `${totalHeight}px`;
         }
 
-        // 2. 核心渲染引擎：对比视口，动态挂载或卸载 DOM
         function renderViewport() {
             const scrollY = window.scrollY;
             const viewportH = window.innerHeight;
             
-            // 计算当前视野的有效区间
             const minVisibleY = scrollY - state.buffer;
             const maxVisibleY = scrollY + viewportH + state.buffer;
 
             const visibleIndices = new Set();
 
-            // 筛选出在可视区间内的图片项
             for (let i = 0; i < state.items.length; i++) {
                 const item = state.items[i];
-                // 如果底边 > 可视上界，且 顶边 < 可视下界，说明进入屏幕
                 if (item.y + item.h > minVisibleY && item.y < maxVisibleY) {
                     visibleIndices.add(i);
                 }
             }
 
-            // [Diff 过程 1]：销毁滚出视口的旧节点
             for (const [index, node] of state.renderedNodes.entries()) {
                 if (!visibleIndices.has(index)) {
-                    node.remove(); // 从 DOM 中移除
+                    node.remove(); 
                     state.renderedNodes.delete(index);
                 }
             }
 
-            // [Diff 过程 2]：挂载滚入视口的新节点
             for (const index of visibleIndices) {
                 if (!state.renderedNodes.has(index)) {
                     const item = state.items[index];
                     const node = document.createElement('div');
                     node.className = 'photo-card';
-                    
-                    // 用 transform 代替 top/left，GPU 加速，滑动完全不掉帧
+                    // 增加 role="listitem" 为屏幕阅读器提供语义化
+                    node.setAttribute('role', 'listitem');
                     node.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
                     node.style.width = `${item.w}px`;
                     node.style.height = `${item.h}px`;
@@ -208,8 +220,9 @@
                     const p = item.data;
                     const imgH = item.h - state.exifHeight;
                     
+                    // 这里应用了 formatUrl 保障路径正确。alt 标签包含图片名字利于图片搜索引擎抓取。
                     node.innerHTML = `
-                        <img src="${p.thumb_url}" alt="${p.name}" style="height: ${imgH}px" data-index="${index}">
+                        <img src="${formatUrl(p.thumb_url)}" alt="${p.name} - 摄影作品" style="height: ${imgH}px" data-index="${index}">
                         <div class="exif">
                             <div class="date">${p.exif.Date}</div>
                             <span>${p.exif.Focal}</span>
@@ -224,7 +237,6 @@
             }
         }
 
-        // 监听滚动事件并使用 requestAnimationFrame 节流
         let ticking = false;
         window.addEventListener('scroll', () => {
             if (!ticking) {
@@ -236,8 +248,7 @@
             }
         });
 
-        // 3. 数据加载流
-        const PAGE_SIZE = 20; // 有了虚拟列表，一页加载多点也毫无压力
+        const PAGE_SIZE = 20; 
         async function loadNextPage() {
             if (state.isFetching || state.currentIndex >= sortedPhotos.length) return;
             state.isFetching = true;
@@ -246,26 +257,21 @@
             const end = Math.min(state.currentIndex + PAGE_SIZE, sortedPhotos.length);
             const batch = sortedPhotos.slice(state.currentIndex, end);
 
-            // 获取这一批图片的宽高比例
             await Promise.all(batch.map(p => {
                 return new Promise(resolve => {
                     if (p._ratio) return resolve();
                     const img = new Image();
                     img.onload = () => { p._ratio = img.naturalHeight / img.naturalWidth; resolve(); };
                     img.onerror = () => { p._ratio = 0.75; resolve(); };
-                    img.src = p.thumb_url;
+                    img.src = formatUrl(p.thumb_url); 
                 });
             }));
 
-            // 装填到虚拟数组中
             const prevLength = state.items.length;
-            batch.forEach((p, i) => {
-                state.items.push({ data: p, x: 0, y: 0, w: 0, h: 0 });
-            });
+            batch.forEach(p => state.items.push({ data: p, x: 0, y: 0, w: 0, h: 0 }));
 
-            // 触发排版与渲染
-            computeLayout(prevLength); // 仅计算新增部分的坐标
-            renderViewport();          // 重新 diff 视口
+            computeLayout(prevLength);
+            renderViewport(); 
 
             state.currentIndex = end;
             state.isFetching = false;
@@ -276,34 +282,29 @@
             }
         }
 
-        // 监听窗口尺寸变化：所有坐标需推倒重来
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
-                const newColCount = getColumnCount();
-                // 如果列数变了，或者屏幕宽度变了(导致列宽变了)，则必须全量重算
-                state.colCount = newColCount;
-                computeLayout(0); // 传0代表全量重新计算坐标
-                renderViewport(); // 重新渲染当前视口
+                if (getColumnCount() !== state.colCount || elPhotoList.clientWidth !== state.containerWidth) {
+                    state.colCount = getColumnCount();
+                    computeLayout(0);
+                    renderViewport();
+                }
             }, 150);
         });
 
-        // 无限滚动侦测器
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) loadNextPage();
         }, { rootMargin: '600px' });
 
-        // 图片点击查看器绑定
         elPhotoList.addEventListener('click', (e) => {
             if (e.target.tagName === 'IMG') {
                 const index = parseInt(e.target.getAttribute('data-index'));
-                const item = state.items[index];
-                new PhotoViewer(item.data, e.target);
+                new PhotoViewer(state.items[index].data, e.target);
             }
         });
 
-        // 初始化运行
         state.colCount = getColumnCount();
         observer.observe(elSentinel);
     </script>
