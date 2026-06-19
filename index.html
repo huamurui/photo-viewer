@@ -1,136 +1,276 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>photos of hmr</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Photos of HMR</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: #f5f5f7;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 600;
+            margin: 30px 0;
+            color: #333;
         }
 
         #playground {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
 
+        /* 纯 JS 瀑布流的 Flex 布局基础 */
         #photo-list {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            gap: 20px;
         }
 
-        #photo-list img {
-            width: 300px;
-            object-fit: contain;
-            margin: 10px;
-            cursor: pointer;
-        }
-
-        .photo {
+        /* 独立的一列，相互互不影响，彻底解决串列抖动 */
+        .masonry-column {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            width: 350px;
-            position: relative;
-            border-radius: 10px;
-            /* margin: 10px; */
+            gap: 20px;
+            /* 防止图片加载前列宽被挤压 */
+            min-width: 0; 
         }
 
-        .photo:hover {
-            background-color: rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+        .photo-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            /* 加入渐隐渐现，让追加更丝滑 */
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
         }
 
-        #photo-viewer img {
-            width: 60%;
-            object-fit: contain;
-            cursor: grab;
-            transition: all 0.2s;
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
 
-        .exif div {
-            /* width: 100%; */
-            text-align: center;
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        #close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            color: white;
-            font-size: 20px;
-            z-index: 100;
+        .photo-card img {
+            width: 100%;
+            display: block;
+            background-color: #eaeaea; /* 加载时的占位色 */
+        }
 
+        .exif {
+            padding: 12px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .exif .date { width: 100%; font-weight: bold; color: #333; margin-bottom: 4px; }
+        .exif span { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+
+        #loading-sentinel {
+            height: 80px;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-
-            width: 30px;
-            height: 30px;
+            align-items: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
             border-radius: 50%;
-            background-color: rgba(255, 225, 93, 0.1);
-
-            transition: all 0.4s;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
         }
-
-        #close:hover {
-            background-color: rgba(255, 237, 157, 0.5);
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 
 <body>
     <div id="playground">
-        <h1>photos of hmr</h1>
+        <h1>Photos of HMR</h1>
         <div id="photo-list"></div>
-        <div id="photo-viewer"></div>
+        <div id="loading-sentinel">
+            <div class="loader"></div> <span>Loading...</span>
+        </div>
     </div>
-    <!-- <script src="node_modules/eruda/eruda.js"></script> -->
-    <!-- <script>eruda.init();</script> -->
-
 
     <script type="module">
-        import photos from './photos/map.json' with { type: "json" }
-        import PhotoViewer from './viewer.js'
+        import photos from './photos/map.json' with { type: "json" };
+        import PhotoViewer from './viewer.js';
 
         const elPhotoList = document.getElementById('photo-list');
-        const elPhotoViewer = document.getElementById('photo-viewer');
+        const elSentinel = document.getElementById('loading-sentinel');
 
-        // const  sample =  {"Date":"2025-03-08","Focal":"150 mm ( 35mm film equivalent: - mm )","FNumber":5.6,"ISO":640,"ExposureTime":"1/320"}
-        elPhotoList.innerHTML = photos.sort((a, b) => {
-            const dateA = new Date(a.exif.Date);
-            const dateB = new Date(b.exif.Date);
-            return dateB - dateA;
-        }).map(item => `
-        <div class="photo">
-            <img src="${item.thumb_url}" alt="${item.name}">
-            <div class="exif">
-                <div>${item.exif.Date}</div>
-                <span>${item.exif.Focal} </span>
-                <span>f/${item.exif.FNumber} </span>
-                <span>${item.exif.ExposureTime}</span>    
-                <span>ISO${item.exif.ISO} </span>
-            </div>
+        // 按日期降序排序
+        const sortedPhotos = photos.sort((a, b) => new Date(b.exif.Date) - new Date(a.exif.Date));
+        
+        const PAGE_SIZE = 15;
+        let currentIndex = 0;
+        let isFetching = false;
+        
+        // 瀑布流列的控制
+        let currentCols = 1;
+        let columnDOMs = [];
+        let columnHeights = []; // 维护一个虚拟高度数组
 
-        </div>`).join('');
+        // 根据屏幕宽度计算应该显示几列
+        function getColumnCount() {
+            const w = window.innerWidth;
+            if (w >= 1200) return 4;
+            if (w >= 900) return 3;
+            if (w >= 600) return 2;
+            return 1;
+        }
+
+        // 初始化/重置瀑布流结构
+        function initLayout() {
+            currentCols = getColumnCount();
+            elPhotoList.innerHTML = '';
+            columnDOMs = [];
+            columnHeights = new Array(currentCols).fill(0);
+
+            for (let i = 0; i < currentCols; i++) {
+                const col = document.createElement('div');
+                col.className = 'masonry-column';
+                elPhotoList.appendChild(col);
+                columnDOMs.push(col);
+            }
+        }
+
+        // 核心渲染方法：找当前最短的列，并插入 DOM
+        function renderItem(item, index) {
+            // 找到当前高度最短的列
+            let minColIndex = 0;
+            let minHeight = columnHeights[0];
+            for (let i = 1; i < currentCols; i++) {
+                if (columnHeights[i] < minHeight) {
+                    minHeight = columnHeights[i];
+                    minColIndex = i;
+                }
+            }
+
+            const card = document.createElement('div');
+            card.className = 'photo-card';
+            
+            // 为了防止图片在渲染时改变卡片高度，利用预计算的比例锁定图片高度 (通过 aspectRatio)
+            const aspectRatio = item._ratio ? item._ratio : 0.75; // 兜底比例
+            
+            card.innerHTML = `
+                <img src="${item.thumb_url}" alt="${item.name}" 
+                     style="aspect-ratio: 1 / ${aspectRatio};" 
+                     loading="lazy" data-index="${index}">
+                <div class="exif">
+                    <div class="date">${item.exif.Date}</div>
+                    <span>${item.exif.Focal}</span>
+                    <span>f/${item.exif.FNumber}</span>
+                    <span>${item.exif.ExposureTime}</span>    
+                    <span>ISO${item.exif.ISO}</span>
+                </div>
+            `;
+
+            columnDOMs[minColIndex].appendChild(card);
+
+            // 更新虚拟高度（图片高度 + Exif信息卡片大约估算的常数高度 + gap边距）
+            // 这样不用等 DOM 重绘完成就能知道大致高度，确保连续追加时均衡分布
+            const columnWidth = columnDOMs[minColIndex].clientWidth || 300;
+            columnHeights[minColIndex] += (columnWidth * aspectRatio) + 120 + 20; 
+        }
+
+        // 加载下一页
+        async function loadNextPage() {
+            if (isFetching || currentIndex >= sortedPhotos.length) return;
+            isFetching = true;
+            elSentinel.style.display = 'flex';
+
+            const end = Math.min(currentIndex + PAGE_SIZE, sortedPhotos.length);
+            const batch = sortedPhotos.slice(currentIndex, end);
+
+            // 杀手锏：并发预加载这一批图片的尺寸，不让其阻塞渲染顺序
+            // 目的是拿到每一张照片的高宽比 _ratio
+            await Promise.all(batch.map(item => {
+                return new Promise(resolve => {
+                    if (item._ratio) return resolve(); // 已经有缓存了
+                    
+                    const img = new Image();
+                    img.onload = () => {
+                        item._ratio = img.naturalHeight / img.naturalWidth;
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        item._ratio = 0.75; // 失败的话给个默认横图比例
+                        resolve();
+                    };
+                    img.src = item.thumb_url;
+                });
+            }));
+
+            // 所有图片的比例都拿到了，开始同步渲染并插入最短列
+            batch.forEach((item, i) => {
+                renderItem(item, currentIndex + i);
+            });
+
+            currentIndex = end;
+            isFetching = false;
+
+            if (currentIndex >= sortedPhotos.length) {
+                elSentinel.innerHTML = '<span>没有更多图片了</span>';
+                observer.disconnect();
+            }
+        }
+
+        // 监听滚动懒加载
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                loadNextPage();
+            }
+        }, { rootMargin: '400px' }); // 提前一点加载，体验更好
+
+        // 监听窗口尺寸变化，如果列数变了就重新排列
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (getColumnCount() !== currentCols) {
+                    initLayout();
+                    // 将已经加载过的数据快速重排 (因为图片 _ratio 已经缓存，所以速度极快)
+                    const renderedPhotos = sortedPhotos.slice(0, currentIndex);
+                    renderedPhotos.forEach((item, i) => renderItem(item, i));
+                }
+            }, 200); // 简单防抖
+        });
+
+        // 事件委托：图片查看器
         elPhotoList.addEventListener('click', (e) => {
-            const target = e.target;
-            if (target.tagName === 'IMG') {
-                const photo = photos.find(item => item.name === target.alt);
-                const photoViewer = new PhotoViewer(elPhotoViewer, photo, target);
+            if (e.target.tagName === 'IMG') {
+                const index = e.target.getAttribute('data-index');
+                new PhotoViewer(sortedPhotos[index], e.target);
             }
         });
 
+        // 初始化
+        initLayout();
+        observer.observe(elSentinel);
     </script>
 </body>
 
