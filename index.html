@@ -77,12 +77,12 @@
         }
 
         .exif {
-            height: 90px; box-sizing: border-box; padding: 12px; font-size: 13px; color: #666;
+            height: 76px; box-sizing: border-box; padding: 12px; font-size: 13px; color: #666;
             line-height: 1.6; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 6px;
         }
 
         .exif .date { width: 100%; font-weight: bold; color: #333; margin-bottom: 2px; }
-        .exif span { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+        .exif span { background: #f0f0f0; padding: 2px 6px; border-radius: 7px; font-size: 12px; }
 
         #loading-sentinel {
             height: 80px; display: flex; justify-content: center;
@@ -139,7 +139,7 @@
         
         const state = {
             items: [], renderedNodes: new Map(), colsHeight: [],
-            colCount: 1, containerWidth: 0, gap: 20, exifHeight: 90, buffer: 1000,
+            colCount: 1, containerWidth: 0, gap: 20, exifHeight: 76, buffer: 1000,
             currentIndex: 0, isFetching: false
         };
 
