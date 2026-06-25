@@ -301,7 +301,12 @@
         elPhotoList.addEventListener('click', (e) => {
             if (e.target.tagName === 'IMG') {
                 const index = parseInt(e.target.getAttribute('data-index'));
-                new PhotoViewer(state.items[index].data, e.target);
+                const allPhotosData = state.items.map(item => item.data);
+                const getTargetElement = (idx) => {
+                    const node = document.querySelector(`img[data-index="${idx}"]`);
+                    return node;
+                };
+                new PhotoViewer(allPhotosData, index, getTargetElement);
             }
         });
 
