@@ -1,7 +1,18 @@
 export default class PhotoViewer {
-    constructor(photo, targetElement) {
-        this.photo = photo;
-        this.targetElement = targetElement;
+    constructor(allPhotos, currentIndex, getTargetElement) {
+        // Legacy support
+        if (!Array.isArray(allPhotos)) {
+            this.allPhotos = [allPhotos];
+            this.currentIndex = 0;
+            this.getTargetElement = () => currentIndex; // Here currentIndex is targetElement
+        } else {
+            this.allPhotos = allPhotos;
+            this.currentIndex = currentIndex;
+            this.getTargetElement = getTargetElement;
+        }
+
+        this.photo = this.allPhotos[this.currentIndex];
+        this.targetElement = this.getTargetElement(this.currentIndex);
         
         this.state = { scale: 1, x: 0, y: 0 };
         this.pointers = new Map();
@@ -67,9 +78,48 @@ export default class PhotoViewer {
             transform-origin: center center;
         `;
 
+        this.indicator = document.createElement('div');
+        this.indicator.style.cssText = `
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            color: white; font-size: 14px; background: rgba(0,0,0,0.5);
+            padding: 5px 15px; border-radius: 20px; z-index: 10000;
+            opacity: 0; transition: opacity 0.3s; user-select: none; pointer-events: none;
+        `;
+
+        this.prevBtn = document.createElement('div');
+        this.prevBtn.innerHTML = `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>`;
+        this.prevBtn.style.cssText = `
+            position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;
+            color: white; background: rgba(255,255,255,0.1); border-radius: 50%;
+            cursor: pointer; z-index: 10000; opacity: 0; transition: opacity 0.3s, background 0.2s;
+        `;
+
+        this.nextBtn = document.createElement('div');
+        this.nextBtn.innerHTML = `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+        this.nextBtn.style.cssText = `
+            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;
+            color: white; background: rgba(255,255,255,0.1); border-radius: 50%;
+            cursor: pointer; z-index: 10000; opacity: 0; transition: opacity 0.3s, background 0.2s;
+        `;
+
+        this.updateIndicator();
+
         this.el.appendChild(this.img);
         this.el.appendChild(this.closeBtn);
+        if (this.allPhotos.length > 1) {
+            this.el.appendChild(this.indicator);
+            this.el.appendChild(this.prevBtn);
+            this.el.appendChild(this.nextBtn);
+        }
         document.body.appendChild(this.el);
+    }
+
+    updateIndicator() {
+        if (this.allPhotos.length > 1) {
+            this.indicator.textContent = `${this.currentIndex + 1} / ${this.allPhotos.length}`;
+        }
     }
 
     animateIn() {
@@ -100,6 +150,11 @@ export default class PhotoViewer {
 
         this.el.style.backgroundColor = 'rgba(0,0,0,0.95)';
         this.closeBtn.style.opacity = '1';
+        if (this.allPhotos.length > 1) {
+            this.indicator.style.opacity = '1';
+            this.prevBtn.style.opacity = '1';
+            this.nextBtn.style.opacity = '1';
+        }
         
         this.img.animate([
             { transform: `translate(${startX}px, ${startY}px) scale(${startScale})` },
@@ -109,30 +164,70 @@ export default class PhotoViewer {
         this.img.style.transform = `translate(0px, 0px) scale(1)`;
     }
 
+    switchPhoto(direction) {
+        if (this.allPhotos.length <= 1) return;
+
+        let newIndex = this.currentIndex + direction;
+        if (newIndex < 0) newIndex = this.allPhotos.length - 1;
+        if (newIndex >= this.allPhotos.length) newIndex = 0;
+
+        this.currentIndex = newIndex;
+        this.photo = this.allPhotos[this.currentIndex];
+        this.updateIndicator();
+
+        this.state = { scale: 1, x: 0, y: 0 };
+        this.applyTransform(true);
+
+        this.img.src = this.getSafeUrl(this.photo.thumb_url);
+        const highRes = new Image();
+        highRes.src = this.getSafeUrl(this.photo.url);
+        highRes.onload = () => { if (this.currentIndex === newIndex) this.img.src = highRes.src; };
+    }
+
     hide() {
         // 【关键修复】注销全局事件，防止内存泄漏和多次绑定触发错乱
         window.removeEventListener('pointermove', this.handlePointerMove);
         window.removeEventListener('pointerup', this.handlePointerUp);
         window.removeEventListener('pointercancel', this.handlePointerUp);
 
-        const rect = this.targetElement.getBoundingClientRect();
+        this.targetElement = this.getTargetElement(this.currentIndex);
+
         const winW = window.innerWidth;
         const winH = window.innerHeight;
 
-        const imgRatio = (this.targetElement.naturalWidth / this.targetElement.naturalHeight) || (rect.width / rect.height);
-        const winRatio = winW / winH;
-        let finalW = imgRatio > winRatio ? winW : winH * imgRatio;
+        let endScale = 1;
+        let endX = 0;
+        let endY = 0;
+        let opacity = 1;
 
-        const endScale = rect.width / finalW;
-        const endX = rect.left + rect.width / 2 - winW / 2;
-        const endY = rect.top + rect.height / 2 - winH / 2;
+        if (this.targetElement) {
+            const rect = this.targetElement.getBoundingClientRect();
+            const imgRatio = (this.targetElement.naturalWidth / this.targetElement.naturalHeight) || (rect.width / rect.height);
+            const winRatio = winW / winH;
+            let finalW = imgRatio > winRatio ? winW : winH * imgRatio;
+
+            endScale = rect.width / finalW;
+            endX = rect.left + rect.width / 2 - winW / 2;
+            endY = rect.top + rect.height / 2 - winH / 2;
+        } else {
+            // Target element is out of DOM or hidden, fade out at current position
+            endScale = this.state.scale;
+            endX = this.state.x;
+            endY = this.state.y;
+            opacity = 0;
+        }
 
         this.el.style.backgroundColor = 'rgba(0,0,0,0)';
         this.closeBtn.style.opacity = '0';
+        if (this.allPhotos.length > 1) {
+            this.indicator.style.opacity = '0';
+            this.prevBtn.style.opacity = '0';
+            this.nextBtn.style.opacity = '0';
+        }
 
         const animation = this.img.animate([
-            { transform: `translate(${this.state.x}px, ${this.state.y}px) scale(${this.state.scale})` },
-            { transform: `translate(${endX}px, ${endY}px) scale(${endScale})` }
+            { transform: `translate(${this.state.x}px, ${this.state.y}px) scale(${this.state.scale})`, opacity: 1 },
+            { transform: `translate(${endX}px, ${endY}px) scale(${endScale})`, opacity: opacity }
         ], { duration: 250, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' });
 
         animation.onfinish = () => {
@@ -152,6 +247,16 @@ export default class PhotoViewer {
         this.closeBtn.addEventListener('click', this.hide);
         this.el.addEventListener('wheel', this.handleWheel, { passive: false });
         this.img.addEventListener('pointerdown', this.handlePointerDown);
+        this.el.addEventListener('click', (e) => {
+            if (e.target === this.el) {
+                this.hide();
+            }
+        });
+
+        if (this.allPhotos.length > 1) {
+            this.prevBtn.addEventListener('click', (e) => { e.stopPropagation(); this.switchPhoto(-1); });
+            this.nextBtn.addEventListener('click', (e) => { e.stopPropagation(); this.switchPhoto(1); });
+        }
 
         // 监听挂载在 Window 上，确保鼠标/手指拖出图片范围外也能响应
         window.addEventListener('pointermove', this.handlePointerMove);
@@ -167,6 +272,7 @@ export default class PhotoViewer {
         if (this.pointers.size === 1) {
             this.isDragging = true;
             this.lastPanPoint = { x: e.clientX, y: e.clientY };
+            this.dragStartPoint = { x: e.clientX, y: e.clientY };
             this.img.style.transition = 'none';
         } else if (this.pointers.size === 2) {
             this.initialPinchDistance = this.getPinchDistance();
@@ -202,6 +308,18 @@ export default class PhotoViewer {
         if (this.pointers.size === 0) {
             this.isDragging = false;
             this.img.style.cursor = 'grab';
+
+            if (this.state.scale === 1 && this.dragStartPoint) {
+                const dx = e.clientX - this.dragStartPoint.x;
+                const threshold = 50;
+                if (dx > threshold) {
+                    this.switchPhoto(-1);
+                    return;
+                } else if (dx < -threshold) {
+                    this.switchPhoto(1);
+                    return;
+                }
+            }
             this.checkBoundsAndReset();
         } else if (this.pointers.size === 1) {
             // 【关键修复】双指缩放时如果先松开一根手指，必须重置记录的单指拖拽点，防止画面闪现瞬移
