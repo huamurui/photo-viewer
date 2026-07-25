@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import EXIF from 'exif';
+import exifr from 'exifr'; // <-- 引入新的 exifr 库
 import sharp from 'sharp';
 import { findClosestShutterSpeed } from './utils.js';
 
@@ -11,18 +11,6 @@ const files = fs.readdirSync(dir);
 if (!fs.existsSync(thumbsDir)) {
     fs.mkdirSync(thumbsDir);
 }
-
-const getExif = async (file) => {
-    return new Promise((resolve, reject) => {
-        new EXIF({ image: file }, (err, data) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(data.exif);
-            }
-        });
-    });
-};
 
 // 获取图片尺寸信息
 const getImageDimensions = async (filePath) => {
@@ -38,7 +26,6 @@ const getImageDimensions = async (filePath) => {
     }
 };
 
-// 获取 dir 下所有文件的文件名及照片信息，存入 map.json
 const map = await Promise.all(files
     .filter(file => (file.endsWith('.jpg') || file.endsWith('.JPG')))
     .map(async file => {
@@ -48,7 +35,6 @@ const map = await Promise.all(files
             url: dir + '/' + file,
             thumb_url: thumbsDir + '/' + file,
             exif: {},
-            // 预留宽高字段
             width: 0,
             height: 0,
             thumb_width: 0,
@@ -61,25 +47,38 @@ const map = await Promise.all(files
             photo.width = dimensions.width;
             photo.height = dimensions.height;
 
-            // 生成缩略图并获取缩略图尺寸
+            // 生成缩略图并获取尺寸
             const thumbInfo = await sharp(filePath)
                 .resize(500)
                 .toFile(path.join(thumbsDir, file));
             
-            // 保存缩略图尺寸
             photo.thumb_width = thumbInfo.width;
             photo.thumb_height = thumbInfo.height;
 
-            // 获取并处理EXIF信息
-            const exif = await getExif(filePath);
-            console.log(exif)
-            photo.exif = {
-                Date: exif?.DateTimeOriginal ? exif.DateTimeOriginal.split(' ')[0].replace(/:/g, '-') : '-',
-                Focal: `${exif?.FocalLength || '-'}mm`,
-                FNumber: exif?.FNumber || '-',
-                ISO: exif?.ISO || '-',
-                ExposureTime: exif?.ExposureTime ? findClosestShutterSpeed(exif.ExposureTime) : '-'
-            };
+            // 使用 exifr 获取并处理EXIF信息 (不会像旧库那样崩溃)
+            const exif = await exifr.parse(filePath);
+            
+            // 【满足你的要求】在这里打印该图片的全部 EXIF 解析信息！
+            console.log(`\n========= ${file} 的全部 EXIF 信息 =========`);
+            console.log(exif);
+            console.log(`================================================`);
+
+            if (exif) {
+                // exifr 默认把日期解析为 Date 对象，我们把它格式化为 YYYY-MM-DD
+                let formattedDate = '-';
+                if (exif.DateTimeOriginal) {
+                    const d = new Date(exif.DateTimeOriginal);
+                    formattedDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                }
+
+                photo.exif = {
+                    Date: formattedDate,
+                    Focal: `${exif.FocalLength || '-'}mm`,
+                    FNumber: exif.FNumber || '-',
+                    ISO: exif.ISO || '-',
+                    ExposureTime: exif.ExposureTime ? findClosestShutterSpeed(exif.ExposureTime) : '-'
+                };
+            }
         } catch (err) {
             console.error(`处理图片失败 ${file}:`, err);
         }
