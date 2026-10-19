@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- ================= SEO ================= -->
     <title>Photos of HMR</title>
@@ -19,7 +19,6 @@
     <meta property="og:url" content="https://huamurui.github.io/photo-viewer/">
     <meta property="og:title" content="Photos of HMR">
     <meta property="og:description" content="看看我拍的照片。">
-    <!-- 建议替换为你最满意的一张照片的缩略图链接作为分享封面 -->
     <meta property="og:image" content="https://huamurui.github.io/photo-viewer/photos/thumbs/P1070261-%E5%B7%B2%E5%A2%9E%E5%BC%BA-NR.jpg">
     <meta property="og:site_name" content="Photos of HMR">
 
@@ -45,274 +44,49 @@
     }
     </script>
 
-    <style>
-        body {
-            margin: 0; padding: 0; background-color: #f5f5f7;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            overflow-y: scroll; overflow-x: hidden;
-        }
-
-        /* 语义化 Header 样式 */
-        header { text-align: center; margin: 30px 0; }
-        header h1 { font-weight: 600; color: #333; margin: 0 0 10px 0; }
-        header p { color: #666; font-size: 14px; margin: 0; }
-
-        #playground { max-width: 1400px; margin: 0 auto; padding: 0 15px; }
-
-        #photo-list {
-            position: relative; width: 100%; transform: translateZ(0);
-        }
-
-        .photo-card {
-            position: absolute; top: 0; left: 0;
-            background: #fff; border-radius: 12px; overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            will-change: transform; cursor: pointer; transition: box-shadow 0.3s ease;
-        }
-
-        .photo-card:hover { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
-
-        .photo-card img {
-            width: 100%; display: block; background-color: #eaeaea; object-fit: cover;
-        }
-
-        .exif {
-            height: 76px; box-sizing: border-box; padding: 12px; font-size: 13px; color: #666;
-            line-height: 1.6; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 6px;
-        }
-
-        .exif .date { width: 100%; font-weight: bold; color: #333; margin-bottom: 2px; }
-        .exif span { background: #f0f0f0; padding: 2px 6px; border-radius: 7px; font-size: 12px; }
-
-        #loading-sentinel {
-            height: 80px; display: flex; justify-content: center;
-            align-items: center; color: #888; font-size: 14px; margin-top: 20px;
-        }
-        
-        .loader {
-            border: 3px solid #f3f3f3; border-top: 3px solid #3498db;
-            border-radius: 50%; width: 20px; height: 20px;
-            animation: spin 1s linear infinite; margin-right: 10px;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* 纯文本提示样式 */
-        .noscript-msg {
-            text-align: center; color: #e74c3c; padding: 20px; font-weight: bold;
-        }
-    </style>
+    <meta name="theme-color" content="#f8f7f4">
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./gallery.css">
+    <link rel="stylesheet" href="./viewer.css">
 </head>
-
 <body>
-    <!-- 对不执行 JS 的老旧爬虫提供的内容备用方案 -->
-    <noscript>
-        <div class="noscript-msg">
-            网站启用 JavaScript 才能正常浏览。Please enable JavaScript to view the high-performance photo gallery.
-        </div>
-    </noscript>
-
-    <!-- 采用语义化的标签 main 代替 div -->
-    <main id="playground">
-        <header>
-            <h1>Photos of HMR</h1>
-        </header>
-
-        <!-- 虚拟列表容器 -->
-        <div id="photo-list" role="list"></div>
-        
-        <div id="loading-sentinel" aria-live="polite">
-            <div class="loader"></div> <span>Loading...</span>
-        </div>
-    </main>
-
-    <script type="module">
-        import photos from './photos/map.json' with { type: "json" };
-        import PhotoViewer from './viewer.js';
-
-        // 统一处理图片路径前缀，防 GitHub Pages 根域名映射丢失
-        const formatUrl = (url) => (url && url.startsWith('/')) ? `.${url}` : url;
-
-        const elPhotoList = document.getElementById('photo-list');
-        const elSentinel = document.getElementById('loading-sentinel');
-
-        const sortedPhotos = photos.sort((a, b) => new Date(b.exif.Date) - new Date(a.exif.Date));
-        
-        const state = {
-            items: [], renderedNodes: new Map(), colsHeight: [],
-            colCount: 1, containerWidth: 0, gap: 20, exifHeight: 76, buffer: 1000,
-            currentIndex: 0, isFetching: false
-        };
-
-        function getColumnCount() {
-            const w = window.innerWidth;
-            if (w >= 1200) return 4;
-            if (w >= 900) return 3;
-            if (w >= 600) return 2;
-            return 1;
-        }
-
-        function computeLayout(startIndex = 0) {
-            state.containerWidth = elPhotoList.clientWidth;
-            const colWidth = (state.containerWidth - (state.colCount - 1) * state.gap) / state.colCount;
-
-            if (startIndex === 0) {
-                state.colsHeight = new Array(state.colCount).fill(0);
-                state.renderedNodes.forEach(node => node.remove());
-                state.renderedNodes.clear();
-            }
-
-            for (let i = startIndex; i < state.items.length; i++) {
-                const item = state.items[i];
-                let minCol = 0; let minH = state.colsHeight[0];
-                
-                for (let c = 1; c < state.colCount; c++) {
-                    if (state.colsHeight[c] < minH) {
-                        minH = state.colsHeight[c]; minCol = c;
-                    }
-                }
-
-                item.w = colWidth;
-                item.h = (colWidth * item.data._ratio) + state.exifHeight;
-                item.x = minCol * (colWidth + state.gap);
-                item.y = minH;
-
-                state.colsHeight[minCol] = minH + item.h + state.gap;
-            }
-
-            const totalHeight = Math.max(...state.colsHeight, 0);
-            elPhotoList.style.height = `${totalHeight}px`;
-        }
-
-        function renderViewport() {
-            const scrollY = window.scrollY;
-            const viewportH = window.innerHeight;
-            
-            const minVisibleY = scrollY - state.buffer;
-            const maxVisibleY = scrollY + viewportH + state.buffer;
-
-            const visibleIndices = new Set();
-
-            for (let i = 0; i < state.items.length; i++) {
-                const item = state.items[i];
-                if (item.y + item.h > minVisibleY && item.y < maxVisibleY) {
-                    visibleIndices.add(i);
-                }
-            }
-
-            for (const [index, node] of state.renderedNodes.entries()) {
-                if (!visibleIndices.has(index)) {
-                    node.remove(); 
-                    state.renderedNodes.delete(index);
-                }
-            }
-
-            for (const index of visibleIndices) {
-                if (!state.renderedNodes.has(index)) {
-                    const item = state.items[index];
-                    const node = document.createElement('div');
-                    node.className = 'photo-card';
-                    // 增加 role="listitem" 为屏幕阅读器提供语义化
-                    node.setAttribute('role', 'listitem');
-                    node.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
-                    node.style.width = `${item.w}px`;
-                    node.style.height = `${item.h}px`;
-                    
-                    const p = item.data;
-                    const imgH = item.h - state.exifHeight;
-                    
-                    // 这里应用了 formatUrl 保障路径正确。alt 标签包含图片名字利于图片搜索引擎抓取。
-                    node.innerHTML = `
-                        <img src="${formatUrl(p.thumb_url)}" alt="${p.name} - 摄影作品" style="height: ${imgH}px" data-index="${index}">
-                        <div class="exif">
-                            <div class="date">${p.exif.Date}</div>
-                            <span>${p.exif.Focal}</span>
-                            <span>f/${p.exif.FNumber}</span>
-                            <span>${p.exif.ExposureTime}</span>    
-                            <span>ISO${p.exif.ISO}</span>
+    <div id="page-shell">
+        <a class="skip-link" href="#collection">跳至照片</a>
+        <main class="page-width">
+            <header class="gallery-header">
+                <h1 id="page-title"><a class="wordmark" href="./">Photos of HMR</a></h1>
+                <details class="gallery-settings">
+                    <summary>浏览设置</summary>
+                    <div class="collection-toolbar">
+                        <div id="year-filters" class="year-filters" role="group" aria-label="按年份筛选">
+                            <button class="year-filter is-active" type="button" data-year="all" aria-pressed="true">全部<span>—</span></button>
                         </div>
-                    `;
-                    elPhotoList.appendChild(node);
-                    state.renderedNodes.set(index, node);
-                }
-            }
-        }
-
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    renderViewport();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-
-        const PAGE_SIZE = 20; 
-        async function loadNextPage() {
-            if (state.isFetching || state.currentIndex >= sortedPhotos.length) return;
-            state.isFetching = true;
-            elSentinel.style.display = 'flex';
-
-            const end = Math.min(state.currentIndex + PAGE_SIZE, sortedPhotos.length);
-            const batch = sortedPhotos.slice(state.currentIndex, end);
-
-            await Promise.all(batch.map(p => {
-                return new Promise(resolve => {
-                    if (p._ratio) return resolve();
-                    const img = new Image();
-                    img.onload = () => { p._ratio = img.naturalHeight / img.naturalWidth; resolve(); };
-                    img.onerror = () => { p._ratio = 0.75; resolve(); };
-                    img.src = formatUrl(p.thumb_url); 
-                });
-            }));
-
-            const prevLength = state.items.length;
-            batch.forEach(p => state.items.push({ data: p, x: 0, y: 0, w: 0, h: 0 }));
-
-            computeLayout(prevLength);
-            renderViewport(); 
-
-            state.currentIndex = end;
-            state.isFetching = false;
-
-            if (state.currentIndex >= sortedPhotos.length) {
-                elSentinel.innerHTML = '<span>没有更多图片了</span>';
-                observer.disconnect();
-            }
-        }
-
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                if (getColumnCount() !== state.colCount || elPhotoList.clientWidth !== state.containerWidth) {
-                    state.colCount = getColumnCount();
-                    computeLayout(0);
-                    renderViewport();
-                }
-            }, 150);
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) loadNextPage();
-        }, { rootMargin: '600px' });
-
-        elPhotoList.addEventListener('click', (e) => {
-            if (e.target.tagName === 'IMG') {
-                const index = parseInt(e.target.getAttribute('data-index'));
-                const allPhotosData = state.items.map(item => item.data);
-                const getTargetElement = (idx) => {
-                    const node = document.querySelector(`img[data-index="${idx}"]`);
-                    return node;
-                };
-                new PhotoViewer(allPhotosData, index, getTargetElement);
-            }
-        });
-
-        state.colCount = getColumnCount();
-        observer.observe(elSentinel);
-    </script>
+                        <div class="view-controls">
+                            <label class="sort-control">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 4v16m-4-4 4 4 4-4M14 5h6m-6 5h4m-4 5h2"/></svg>
+                                <select id="sort-order" aria-label="照片排序"><option value="newest">最新在前</option><option value="oldest">最早在前</option></select>
+                                <svg class="select-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                            </label>
+                            <span class="control-divider"></span>
+                            <button type="button" id="details-toggle" class="details-toggle" aria-pressed="false" title="显示拍摄参数"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v6m0-10v1"/></svg><span>参数</span></button>
+                            <div class="layout-controls" role="group" aria-label="照片布局">
+                                <button type="button" class="icon-button is-active" data-layout="relaxed" aria-label="舒展布局" aria-pressed="true" title="舒展布局"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="2.5" y="2.5" width="5.5" height="15" rx="1"/><rect x="12" y="2.5" width="5.5" height="15" rx="1"/></svg></button>
+                                <button type="button" class="icon-button" data-layout="compact" aria-label="紧凑布局" aria-pressed="false" title="紧凑布局"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="2" y="2.5" width="3.5" height="15" rx=".7"/><rect x="8.25" y="2.5" width="3.5" height="15" rx=".7"/><rect x="14.5" y="2.5" width="3.5" height="15" rx=".7"/></svg></button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </header>
+            <section id="collection" aria-label="摄影作品" tabindex="-1">
+                <p id="collection-status" class="visually-hidden" role="status">正在加载照片…</p>
+                <div id="gallery-message" class="gallery-message" hidden></div>
+                <ul id="photo-list" aria-label="照片列表" aria-busy="true"></ul>
+                <p class="collection-end" id="collection-end" hidden>已显示全部照片</p>
+            </section>
+            <noscript><p class="gallery-message">请启用 JavaScript 浏览照片墙。</p></noscript>
+        </main>
+        <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button>
+    </div>
+    <script type="module" src="./gallery.js"></script>
 </body>
-
 </html>
